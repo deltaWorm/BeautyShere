@@ -1,0 +1,286 @@
+html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beauty Сфера - Парикмахерская в Большом Камне</title>
+       <!-- Фавиконки для разных устройств -->
+    <link rel="apple-touch-icon" sizes="180x180" href="images/logo/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/logo/favicon-16x16.png">
+    <link rel="manifest" href="images/logo/site.webmanifest">
+    <link rel="mask-icon" href="images/logo/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">    
+</head>
+<body>
+    <!-- Шапка -->
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="index.html" class="logo">
+                      <img src="images/logo/logo.png" alt="Beauty Сфера" class="logo-img">
+                <span class="logo-text">
+                    <span class="logo-text">Beauty</span>
+                    <span class="logo-highlight">Сфера</span>
+                </a>
+                
+                 <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="nav-link active">Главная</a></li>
+                        <li><a href="pages/services.html" class="nav-link">Услуги и цены</a></li>
+                        <li><a href="pages/masters.html" class="nav-link">Мастера</a></li>
+                        <li><a href="pages/booking.html" class="nav-link">Онлайн-запись</a></li>
+                        <li><a href="pages/portfolio.html" class="nav-link">Портфолио</a></li>
+                        <li><a href="pages/news.html" class="nav-link">Акции</a></li>
+                        <li><a href="pages/contacts.html" class="nav-link">Контакты</a></li>
+                        <li><a href="pages/cabinet.html" class="nav-link cabinet-link">
+                            <i class="fas fa-user"></i> Личный кабинет
+                        </a></li>
+                    </ul>
+                </nav>
+                
+                <button class="mobile-menu-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Герой секция -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Beauty Сфера</h1>
+                <p class="hero-subtitle">Профессиональная парикмахерская в Большом Камне. Создаем красоту и стиль с 2015 года.</p>
+                <div class="hero-actions">
+                    <a href="pages/booking.html" class="btn btn-primary">Записаться онлайн</a>
+                    <a href="pages/services.html" class="btn btn-outline">Услуги и цены</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Преимущества -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Почему выбирают нас</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3 class="feature-title">Опытные мастера</h3>
+                    <p class="feature-text">Профессионалы с опытом работы от 5 лет, регулярно повышающие квалификацию на всероссийских семинарах</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3 class="feature-title">Качественные материалы</h3>
+                    <p class="feature-text">Используем профессиональную косметику премиум-класса: L'Oreal Professionnel, Estel, Kapous</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="feature-title">Удобное время работы</h3>
+                    <p class="feature-text">Работаем без выходных с 9:00 до 20:00. Онлайн-запись доступна 24/7</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Удобное расположение</h3>
+                    <p class="feature-text">Центр города, удобный подъезд. Ул. Карла Маркса, 13а</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- В секции услуг -->
+<section class="services" id="services">
+    <div class="container">
+        <h2 class="section-title">Популярные услуги</h2>
+        <p class="section-subtitle">Наши самые востребованные услуги по доступным ценам</p>
+        <div class="services-container" id="popular-services">
+            <!-- Услуги загружаются через JS -->
+        </div>
+        <div class="text-center" style="margin-top: 40px;">
+            <a href="pages/services.html" class="btn btn-primary">Все услуги и цены</a>
+        </div>
+    </div>
+</section>
+
+<!-- Секция мастеров с горизонтальным слайдером -->
+<section class="masters-horizontal" id="masters">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Наши мастера</h2>
+            <p class="section-subtitle">Профессионалы с многолетним опытом работы</p>
+            <div class="slider-controls">
+                <button class="slider-btn prev-btn" aria-label="Предыдущий слайд">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="slider-dots"></div>
+                <button class="slider-btn next-btn" aria-label="Следующий слайд">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="masters-slider-container">
+            <div class="masters-slider" id="masters-preview">
+                <!-- Мастера загружаются через JS -->
+            </div>
+        </div>
+        
+        <div class="text-center" style="margin-top: 40px;">
+            <a href="pages/masters.html" class="btn btn-primary">Все мастера</a>
+        </div>
+    </div>
+</section>
+
+<!-- В секции акций -->
+<section class="promotions" id="promotions">
+    <div class="container">
+        <h2 class="section-title">Акции и скидки</h2>
+        <p class="section-subtitle">Выгодные предложения для наших клиентов</p>
+        <div class="promotions-container" id="promotions-container">
+            <!-- Акции загружаются через JS -->
+        </div>
+        <div class="text-center" style="margin-top: 40px;">
+            <a href="pages/news.html" class="btn btn-primary">Все акции</a>
+        </div>
+    </div>
+</section>
+
+<!-- В секции отзывов -->
+<section class="reviews" id="reviews">
+    <div class="container">
+        <h2 class="section-title">Отзывы клиентов</h2>
+        <p class="section-subtitle">Что говорят о нас наши клиенты</p>
+        <div class="reviews-container" id="reviews-container">
+            <!-- Отзывы загружаются через JS -->
+        </div>
+    </div>
+</section>
+
+<!-- В секции контактов (вместо старой) -->
+<section class="contacts-preview" id="contacts">
+    <div class="container">
+        <div id="contacts-preview">
+            <!-- Контакты загружаются через JS -->
+        </div>
+    </div>
+</section>
+    <!-- Форма отзыва (модалка) -->
+    <div class="modal" id="review-modal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <h3>Оставить отзыв</h3>
+            <form id="review-form">
+                <div class="form-group">
+                    <label for="review-name">Ваше имя</label>
+                    <input type="text" id="review-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="review-rating">Оценка</label>
+                    <select id="review-rating" required>
+                        <option value="5">Отлично (5)</option>
+                        <option value="4">Хорошо (4)</option>
+                        <option value="3">Удовлетворительно (3)</option>
+                        <option value="2">Плохо (2)</option>
+                        <option value="1">Очень плохо (1)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="review-text">Текст отзыва</label>
+                    <textarea id="review-text" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Отправить отзыв</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3 class="footer-title">Beauty Сфера</h3>
+                    <p class="footer-text">Профессиональная парикмахерская в Большом Камне. Создаем красоту и стиль с 2015 года.</p>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Контакты</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Улица Карла Маркса, 13а, 1 этаж</p>
+                    <p><i class="fas fa-phone"></i> +7 (423) 352-14-25</p>
+                    <p><i class="fas fa-envelope"></i> beauty-sphere@mail.ru</p>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Часы работы</h3>
+                    <p>Понедельник - Пятница: 9:00 - 20:00</p>
+                    <p>Суббота: 10:00 - 19:00</p>
+                    <p>Воскресенье: 10:00 - 18:00</p>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Быстрые ссылки</h3>
+                    <ul class="footer-links">
+                        <li><a href="pages/services.html">Услуги и цены</a></li>
+                        <li><a href="pages/masters.html">Наши мастера</a></li>
+                        <li><a href="pages/booking.html">Онлайн-запись</a></li>
+                        <li><a href="pages/news.html">Акции и новости</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Beauty Сфера. Все права защищены.</p>
+                <div class="social-links">
+                    <a href="https://vk.com/beautysphere_bk" target="_blank"><i class="fab fa-vk"></i></a>
+                    <a href="https://instagram.com/beauty_sphere_bk" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://t.me/beautysphere_bk" target="_blank"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+ <!-- Модальное окно для отзыва -->
+    <div class="modal" id="review-modal" style="display: none;">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <h3>Оставить отзыв</h3>
+            <form id="review-form">
+                <div class="form-group">
+                    <label for="review-name">Ваше имя *</label>
+                    <input type="text" id="review-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="review-rating">Оценка *</label>
+                    <select id="review-rating" required>
+                        <option value="5">5 ★</option>
+                        <option value="4">4 ★</option>
+                        <option value="3">3 ★</option>
+                        <option value="2">2 ★</option>
+                        <option value="1">1 ★</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="review-text">Текст отзыва *</label>
+                    <textarea id="review-text" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Отправить отзыв</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Наши мастера - Beauty Сфера</title>
+      <!-- Фавиконки для разных устройств -->
+    <link rel="apple-touch-icon" sizes="180x180" href="images/logo/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/logo/favicon-16x16.png">
+    <link rel="manifest" href="images/logo/site.webmanifest">
+    <link rel="mask-icon" href="images/logo/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Стили для страницы мастеров */
+        .masters-section {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+        
+        .master-card-detail {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            transition: transform 0.3s ease;
+        }
+        
+        .master-card-detail:hover {
+            transform: translateY(-5px);
+        }
+        
+        .master-header {
+            padding: 40px 40px 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .master-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid white;
+            overflow: hidden;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: bold;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+        
+        .master-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .master-info {
+            flex: 1;
+        }
+        
+        .master-name {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .master-specialization {
+            font-size: 20px;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+        
+        .master-rating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .stars {
+            color: #FFD700;
+            font-size: 20px;
+        }
+        
+        .master-experience {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        
+        .master-content {
+            padding: 40px;
+        }
+        
+        .master-description {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+        
+        .master-skills {
+            margin-bottom: 40px;
+        }
+        
+        .skills-title {
+            font-size: 24px;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+        
+        .skills-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .skill-item {
+            background: var(--light);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .skill-name {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+        
+        .skill-level {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .skill-bar {
+            flex: 1;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .skill-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 4px;
+        }
+        
+        .certificates-section {
+            margin-bottom: 40px;
+        }
+        
+        .certificates-title {
+            font-size: 24px;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+        
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .certificate-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .certificate-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .certificate-icon {
+            font-size: 48px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .certificate-name {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        
+        .certificate-year {
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        .master-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        /* Стили для расписания */
+        .schedule {
+            padding: 80px 0;
+            background-color: var(--white);
+        }
+        
+        .schedule-table {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background: white;
+        }
+        
+        .schedule-table table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+        
+        .schedule-table th {
+            padding: 15px;
+            text-align: center;
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            border-bottom: 3px solid var(--primary-dark);
+        }
+        
+        .schedule-table td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid var(--light-gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .schedule-table td:hover {
+            transform: scale(1.05);
+            z-index: 1;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        .master-name-cell {
+            text-align: left;
+            font-weight: 600;
+            background-color: var(--white);
+            position: sticky;
+            left: 0;
+            z-index: 2;
+            min-width: 200px;
+        }
+        
+        .even-row {
+            background-color: var(--white);
+        }
+        
+        .odd-row {
+            background-color: var(--light);
+        }
+        
+        /* Стили для статусов расписания */
+        .working {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .working:hover {
+            background-color: #c3e6cb;
+        }
+        
+        .working:after {
+            content: '✓';
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 12px;
+            opacity: 0.7;
+        }
+        
+        .dayoff {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .dayoff:hover {
+            background-color: #f5c6cb;
+        }
+        
+        .vacation {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .vacation:hover {
+            background-color: #ffeaa7;
+        }
+        
+        .time-slot {
+            padding: 5px;
+        }
+        
+        .day-name {
+            font-weight: bold;
+            margin-bottom: 3px;
+            font-size: 14px;
+        }
+        
+        .time-range {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+        
+        /* Легенда расписания */
+        .schedule-legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+            padding: 20px;
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        
+        .legend-color.working {
+            background-color: #d4edda;
+            border: 2px solid #155724;
+        }
+        
+        .legend-color.dayoff {
+            background-color: #f8d7da;
+            border: 2px solid #721c24;
+        }
+        
+        .legend-color.vacation {
+            background-color: #fff3cd;
+            border: 2px solid #856404;
+        }
+        
+        /* Как выбрать мастера */
+        .choose-master {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+        
+        .choose-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .choose-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .choose-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .choose-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+        
+        .choose-card h3 {
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .master-header {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 20px;
+            }
+            
+            .master-avatar {
+                width: 120px;
+                height: 120px;
+                margin: 0 auto;
+            }
+            
+            .master-name {
+                font-size: 28px;
+            }
+            
+            .master-content {
+                padding: 30px 20px;
+            }
+            
+            .master-actions {
+                flex-direction: column;
+            }
+            
+            .master-actions .btn {
+                width: 100%;
+            }
+            
+            .schedule-table table {
+                min-width: 700px;
+            }
+            
+            .schedule-table th,
+            .schedule-table td {
+                padding: 10px 8px;
+                font-size: 14px;
+            }
+            
+            .day-name {
+                font-size: 13px;
+            }
+            
+            .time-range {
+                font-size: 12px;
+            }
+            
+            .schedule-legend {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .master-header {
+                padding: 20px 15px;
+            }
+            
+            .master-content {
+                padding: 20px 15px;
+            }
+            
+            .skills-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .certificates-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .choose-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="../index.html" class="logo">
+                          <img src="../images/logo/logo.png" alt="Beauty Сфера" class="logo-img">
+                <span class="logo-text">
+                    <span class="logo-text">Beauty</span>
+                    <span class="logo-highlight">Сфера</span>
+                </a>
+                
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="../index.html" class="nav-link">Главная</a></li>
+                        <li><a href="services.html" class="nav-link">Услуги и цены</a></li>
+                        <li><a href="masters.html" class="nav-link active">Мастера</a></li>
+                        <li><a href="booking.html" class="nav-link">Онлайн-запись</a></li>
+                        <li><a href="portfolio.html" class="nav-link">Портфолио</a></li>
+                        <li><a href="news.html" class="nav-link">Акции</a></li>
+                        <li><a href="contacts.html" class="nav-link">Контакты</a></li>
+                        <li><a href="cabinet.html" class="nav-link cabinet-link">
+                            <i class="fas fa-user"></i> Личный кабинет
+                        </a></li>
+                    </ul>
+                </nav>
+                
+                <button class="mobile-menu-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Хлебные крошки -->
+    <div class="breadcrumbs">
+        <div class="container">
+            <a href="../index.html">Главная</a>
+            <span>/</span>
+            <span>Наши мастера</span>
+        </div>
+    </div>
+
+    <!-- Заголовок страницы -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Наши мастера</h1>
+            <p>Профессионалы с многолетним опытом, которые сделают вас красивее</p>
+        </div>
+    </section>
+
+    <!-- Мастера -->
+    <section class="masters-section">
+        <div class="container">
+            <div id="masters-container">
+                <!-- Мастера загружаются через JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Расписание мастеров -->
+    <section class="schedule">
+        <div class="container">
+            <h2 class="section-title">Расписание мастеров</h2>
+            <div class="schedule-container">
+                <div class="schedule-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Мастер</th>
+                                <th>Понедельник</th>
+                                <th>Вторник</th>
+                                <th>Среда</th>
+                                <th>Четверг</th>
+                                <th>Пятница</th>
+                                <th>Суббота</th>
+                                <th>Воскресенье</th>
+                            </tr>
+                        </thead>
+                        <tbody id="schedule-body">
+                            <!-- Расписание загружается через JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="schedule-legend">
+                    <div class="legend-item">
+                        <span class="legend-color working"></span>
+                        <span>Рабочий день</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color dayoff"></span>
+                        <span>Выходной</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color vacation"></span>
+                        <span>Отпуск</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Сертификаты -->
+    <section class="certificates">
+        <div class="container">
+            <h2 class="section-title">Сертификаты и награды</h2>
+            <div class="certificates-grid">
+                <div class="certificate-card">
+                    <div class="certificate-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>Сертифицированные мастера</h3>
+                    <p>Все наши специалисты имеют сертификаты от ведущих брендов косметики: L'Oreal Professionnel, Estel, Kapous</p>
+                </div>
+                <div class="certificate-card">
+                    <div class="certificate-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>Победители конкурсов</h3>
+                    <p>Наши мастера - призеры региональных и всероссийских конкурсов парикмахерского искусства</p>
+                </div>
+                <div class="certificate-card">
+                    <div class="certificate-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Регулярное обучение</h3>
+                    <p>Ежегодное повышение квалификации на международных семинарах и мастер-классах</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Как выбрать мастера -->
+    <section class="choose-master">
+        <div class="container">
+            <h2 class="section-title">Как выбрать мастера?</h2>
+            <div class="choose-grid">
+                <div class="choose-card">
+                    <div class="choose-number">1</div>
+                    <h3>Определите услугу</h3>
+                    <p>Выберите нужную услугу в разделе "Услуги и цены"</p>
+                </div>
+                <div class="choose-card">
+                    <div class="choose-number">2</div>
+                    <h3>Изучите специализацию</h3>
+                    <p>Посмотрите, какой мастер специализируется на выбранной услуге</p>
+                </div>
+                <div class="choose-card">
+                    <div class="choose-number">3</div>
+                    <h3>Проверьте расписание</h3>
+                    <p>Убедитесь, что мастер работает в удобное для вас время</p>
+                </div>
+                <div class="choose-card">
+                    <div class="choose-number">4</div>
+                    <h3>Запишитесь онлайн</h3>
+                    <p>Выберите мастера и время в форме онлайн-записи</p>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="booking.html" class="btn btn-primary">Записаться к мастеру</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3 class="footer-title">Beauty Сфера</h3>
+                    <p class="footer-text">Профессиональная парикмахерская в Большом Камне. Создаем красоту и стиль с 2015 года.</p>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Контакты</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Улица Карла Маркса, 13а, 1 этаж</p>
+                    <p><i class="fas fa-phone"></i> +7 (423) 352-14-25</p>
+                    <p><i class="fas fa-envelope"></i> beauty-sphere@mail.ru</p>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Часы работы</h3>
+                    <p>Понедельник - Пятница: 9:00 - 20:00</p>
+                    <p>Суббота: 10:00 - 19:00</p>
+                    <p>Воскресенье: 10:00 - 18:00</p>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Быстрые ссылки</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html">Услуги и цены</a></li>
+                        <li><a href="masters.html">Наши мастера</a></li>
+                        <li><a href="booking.html">Онлайн-запись</a></li>
+                        <li><a href="news.html">Акции и новости</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Beauty Сфера. Все права защищены.</p>
+                <div class="social-links">
+                    <a href="https://vk.com/beautysphere_bk" target="_blank"><i class="fab fa-vk"></i></a>
+                    <a href="https://instagram.com/beauty_sphere_bk" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://t.me/beautysphere_bk" target="_blank"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/data.js"></script>
+    <script>
+        // Скрипт для страницы мастеров
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAllMasters();
+            loadSchedule();
+        });
+
+        // Загрузка всех мастеров с подробной информацией
+        async function loadAllMasters() {
+            const container = document.getElementById('masters-container');
+            if (!container) return;
+            
+            try {
+                const masters = await window.beautySphereData.getMasters();
+                
+                if (!masters || masters.length === 0) {
+                    container.innerHTML = `
+                        <div class="text-center" style="grid-column: 1/-1; padding: 40px;">
+                            <h3>Информация о мастерах временно недоступна</h3>
+                            <p>Пожалуйста, зайдите позже или свяжитесь с нами по телефону.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                container.innerHTML = masters.map(master => createMasterCard(master)).join('');
+                
+                // Добавляем обработчики для кнопок записи
+                setupBookButtons();
+                
+            } catch (error) {
+                console.error('Ошибка загрузки мастеров:', error);
+                container.innerHTML = `
+                    <div class="text-center" style="grid-column: 1/-1; padding: 40px; color: #721c24;">
+                        <h3>Ошибка загрузки мастеров</h3>
+                        <p>Пожалуйста, попробуйте позже или свяжитесь с нами по телефону.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Функция создания карточки мастера с полной информацией
+        function createMasterCard(master) {
+            const initials = master.name.split(' ').map(n => n[0]).join('').toUpperCase();
+            const rating = getRandomRating();
+            const certificates = generateCertificates(master.experience);
+            
+            return `
+                <div class="master-card-detail" data-master-id="${master.id}">
+                    <div class="master-header">
+                        <div class="master-avatar">
+                            ${initials}
+                        </div>
+                        <div class="master-info">
+                            <h2 class="master-name">${master.name}</h2>
+                            <div class="master-specialization">${master.specialization}</div>
+                            <div class="master-rating">
+                                <div class="stars">
+                                    ${'★'.repeat(Math.floor(rating))}${'☆'.repeat(5 - Math.floor(rating))}
+                                </div>
+                                <span>${rating.toFixed(1)}/5.0</span>
+                                <span class="master-experience">${master.experience} опыта</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="master-content">
+                        <p class="master-description">${master.description}</p>
+                        
+                        <div class="master-skills">
+                            <h3 class="skills-title">Навыки и специализация</h3>
+                            <div class="skills-list">
+                                ${generateSkills(master.specialization).map(skill => `
+                                    <div class="skill-item">
+                                        <div class="skill-name">${skill.name}</div>
+                                        <div class="skill-level">
+                                            <div class="skill-bar">
+                                                <div class="skill-fill" style="width: ${skill.level}%"></div>
+                                            </div>
+                                            <span>${skill.level}%</span>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        
+                        <div class="certificates-section">
+                            <h3 class="certificates-title">Сертификаты и награды</h3>
+                            <div class="certificates-grid">
+                                ${certificates.map(cert => `
+                                    <div class="certificate-card">
+                                        <div class="certificate-icon">
+                                            <i class="fas fa-award"></i>
+                                        </div>
+                                        <div class="certificate-name">${cert.name}</div>
+                                        <div class="certificate-year">${cert.year}</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        
+                        <div class="master-actions">
+                            <a href="booking.html?master=${master.id}" class="btn btn-primary">
+                                <i class="fas fa-calendar-check"></i> Записаться к мастеру
+                            </a>
+                            <button class="btn btn-outline view-portfolio-btn" data-master-id="${master.id}">
+                                <i class="fas fa-images"></i> Посмотреть портфолио
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Генерация случайного рейтинга (для демо)
+        function getRandomRating() {
+            return 4 + Math.random();
+        }
+
+        // Генерация сертификатов на основе опыта
+        function generateCertificates(experience) {
+            const years = parseInt(experience);
+            const certificates = [
+                { name: "Мастер парикмахерского искусства", year: "2015" },
+                { name: "Специалист по колористике", year: "2016" },
+                { name: "Сертификат Vidal Sassoon", year: "2017" },
+                { name: "Мастер стрижек и укладок", year: "2018" },
+                { name: "Специалист по уходу за волосами", year: "2019" },
+                { name: "Курс современного барберинга", year: "2020" },
+                { name: "Сертификат L'Oréal Professionnel", year: "2021" },
+                { name: "Мастер сложного окрашивания", year: "2022" },
+                { name: "Курс по работе с кератином", year: "2023" },
+                { name: "Специалист по наращиванию волос", year: "2024" }
+            ];
+            
+            // Возвращаем сертификаты в зависимости от опыта
+            return certificates.slice(0, Math.min(years + 2, certificates.length));
+        }
+
+        // Генерация навыков на основе специализации
+        function generateSkills(specialization) {
+            const allSkills = {
+                "Топ-стилист, колорист": [
+                    { name: "Сложное окрашивание", level: 95 },
+                    { name: "Колористика", level: 98 },
+                    { name: "Вечерние прически", level: 90 },
+                    { name: "Мелирование", level: 92 },
+                    { name: "Омбре", level: 88 },
+                    { name: "Шатуш", level: 85 }
+                ],
+                "Парикмахер-стилист": [
+                    { name: "Женские стрижки", level: 92 },
+                    { name: "Укладка", level: 90 },
+                    { name: "Детские стрижки", level: 88 },
+                    { name: "Стрижка горячими ножницами", level: 85 },
+                    { name: "Уход за волосами", level: 87 },
+                    { name: "Стрижка каре", level: 93 }
+                ],
+                "Барбер": [
+                    { name: "Мужские стрижки", level: 96 },
+                    { name: "Стрижка бороды", level: 94 },
+                    { name: "Королевское бритье", level: 90 },
+                    { name: "Уход за бородой", level: 92 },
+                    { name: "Моделирование усов", level: 88 },
+                    { name: "Стрижка машинкой", level: 95 }
+                ],
+                "Мастер по уходу": [
+                    { name: "Кератиновое выпрямление", level: 97 },
+                    { name: "Ламинирование волос", level: 94 },
+                    { name: "Восстановление волос", level: 96 },
+                    { name: "Пилинг кожи головы", level: 88 },
+                    { name: "SPA-процедуры", level: 92 },
+                    { name: "Ароматерапия", level: 85 }
+                ]
+            };
+            
+            return allSkills[specialization] || [
+                { name: "Парикмахерское искусство", level: 90 },
+                { name: "Стрижка", level: 85 },
+                { name: "Окрашивание", level: 80 },
+                { name: "Укладка", level: 75 }
+            ];
+        }
+
+        // Настройка кнопок
+        function setupBookButtons() {
+            // Обработчик для кнопки "Посмотреть портфолио"
+            document.querySelectorAll('.view-portfolio-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const masterId = this.dataset.masterId;
+                    showMasterPortfolio(masterId);
+                });
+            });
+        }
+
+        // Показ портфолио мастера
+        function showMasterPortfolio(masterId) {
+            alert('Портфолио мастера будет загружено в следующих версиях приложения. Сейчас вы можете посмотреть наши работы в разделе "Портфолио".');
+        }
+
+        // Загрузка расписания мастеров
+        async function loadSchedule() {
+            const container = document.getElementById('schedule-body');
+            if (!container) return;
+            
+            try {
+                const masters = await window.beautySphereData.getMasters();
+                
+                if (!masters || masters.length === 0) {
+                    container.innerHTML = `
+                        <tr>
+                            <td colspan="8" style="text-align: center; padding: 40px; color: var(--gray);">
+                                Расписание временно недоступно
+                            </td>
+                        </tr>
+                    `;
+                    return;
+                }
+                
+                // Генерируем расписание для каждого мастера
+                let scheduleHTML = '';
+                
+                masters.forEach((master, index) => {
+                    const schedule = generateMasterSchedule(master.id);
+                    
+                    scheduleHTML += `
+                        <tr class="${index % 2 === 0 ? 'even-row' : 'odd-row'}">
+                            <td class="master-name-cell">
+                                <strong>${master.name}</strong><br>
+                                <small>${master.specialization}</small>
+                            </td>
+                            ${generateScheduleCells(schedule)}
+                        </tr>
+                    `;
+                });
+                
+                container.innerHTML = scheduleHTML;
+                
+                // Добавляем обработчик для показа подробного расписания
+                addScheduleDetails();
+                
+            } catch (error) {
+                console.error('Ошибка загрузки расписания:', error);
+                container.innerHTML = `
+                    <tr>
+                        <td colspan="8" style="text-align: center; padding: 40px; color: #721c24;">
+                            Ошибка загрузки расписания
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+
+        // Генерация расписания для мастера
+        function generateMasterSchedule(masterId) {
+            // В реальном приложении здесь будет загрузка с сервера
+            const schedules = {
+                1: ['9:00-20:00', '9:00-20:00', '9:00-20:00', '9:00-20:00', '9:00-20:00', '10:00-19:00', '10:00-18:00'],
+                2: ['9:00-20:00', '9:00-20:00', 'выходной', '9:00-20:00', '9:00-20:00', '10:00-19:00', '10:00-18:00'],
+                3: ['9:00-20:00', '9:00-20:00', '9:00-20:00', 'выходной', '9:00-20:00', '10:00-19:00', 'выходной'],
+                4: ['9:00-20:00', '9:00-20:00', '9:00-20:00', '9:00-20:00', '9:00-20:00', '10:00-19:00', '10:00-18:00'],
+            };
+            
+            return schedules[masterId] || schedules[1];
+        }
+
+        // Генерация ячеек расписания
+        function generateScheduleCells(schedule) {
+            const days = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+            let cells = '';
+            
+            schedule.forEach((time, index) => {
+                let className = 'working';
+                let tooltip = 'Рабочий день';
+                
+                if (time === 'выходной') {
+                    className = 'dayoff';
+                    tooltip = 'Выходной';
+                } else if (time.includes('отпуск')) {
+                    className = 'vacation';
+                    tooltip = 'Отпуск';
+                }
+                
+                cells += `
+                    <td class="${className}" data-day="${days[index]}" data-time="${time}" title="${tooltip}: ${time}">
+                        <div class="time-slot">
+                            <div class="day-name">${days[index]}</div>
+                            <div class="time-range">${time}</div>
+                        </div>
+                    </td>
+                `;
+            });
+            
+            return cells;
+        }
+
+        // Добавление подробного расписания при клике
+        function addScheduleDetails() {
+            const cells = document.querySelectorAll('#schedule-body td[data-day]');
+            
+            cells.forEach(cell => {
+                cell.addEventListener('click', function() {
+                    const day = this.dataset.day;
+                    const time = this.dataset.time;
+                    
+                    // Показываем модальное окно с подробной информацией
+                    showScheduleDetails(day, time, this);
+                });
+            });
+        }
+
+        // Показ подробного расписания
+        function showScheduleDetails(day, time, cell) {
+            const dayNames = {
+                'Пн': 'Понедельник',
+                'Вт': 'Вторник',
+                'Ср': 'Среда',
+                'Чт': 'Четверг',
+                'Пт': 'Пятница',
+                'Сб': 'Суббота',
+                'Вс': 'Воскресенье'
+            };
+            
+            const statuses = {
+                'working': 'Рабочий день',
+                'dayoff': 'Выходной',
+                'vacation': 'Отпуск'
+            };
+            
+            const status = cell.classList.contains('working') ? 'working' :
+                          cell.classList.contains('dayoff') ? 'dayoff' : 'vacation';
+            
+            const modalHTML = `
+                <div class="schedule-modal" style="
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0,0,0,0.5);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 1000;
+                ">
+                    <div class="modal-content" style="
+                        background: white;
+                        padding: 40px;
+                        border-radius: 15px;
+                        max-width: 500px;
+                        width: 90%;
+                        box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+                    ">
+                        <h3 style="margin-bottom: 20px; color: var(--dark);">Расписание на ${dayNames[day]}</h3>
+                        <p><strong>Статус:</strong> ${statuses[status]}</p>
+                        <p><strong>Время работы:</strong> ${time}</p>
+                        <p><strong>Запись доступна:</strong> ${status === 'working' ? 'Да' : 'Нет'}</p>
+                        ${status === 'working' ? `
+                            <div class="available-slots" style="margin: 20px 0;">
+                                <h4 style="margin-bottom: 10px;">Доступные слоты:</h4>
+                                <div class="slots-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px;">
+                                    ${generateTimeSlots(time).map(slot => `
+                                        <div class="time-slot-btn" data-time="${slot}" style="
+                                            padding: 10px;
+                                            background-color: var(--primary-light);
+                                            border-radius: 8px;
+                                            text-align: center;
+                                            cursor: pointer;
+                                            transition: var(--transition);
+                                        ">${slot}</div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+                        <div style="display: flex; gap: 10px; margin-top: 30px;">
+                            <button class="btn btn-primary close-modal">Закрыть</button>
+                            ${status === 'working' ? `
+                                <button class="btn btn-secondary book-now">Записаться</button>
+                            ` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Создаем и показываем модальное окно
+            const modal = document.createElement('div');
+            modal.innerHTML = modalHTML;
+            document.body.appendChild(modal);
+            
+            // Закрытие модального окна
+            modal.querySelector('.close-modal').addEventListener('click', () => {
+                modal.remove();
+            });
+            
+            // Запись на выбранное время
+            const bookBtn = modal.querySelector('.book-now');
+            if (bookBtn) {
+                bookBtn.addEventListener('click', () => {
+                    window.location.href = 'booking.html';
+                    modal.remove();
+                });
+            }
+            
+            // Выбор слота времени
+            modal.querySelectorAll('.time-slot-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const selectedTime = this.dataset.time;
+                    alert(`Вы выбрали время: ${selectedTime}. Переходим к записи...`);
+                    window.location.href = 'booking.html?time=' + encodeURIComponent(selectedTime);
+                    modal.remove();
+                });
+            });
+        }
+
+        // Генерация доступных слотов времени
+        function generateTimeSlots(timeRange) {
+            if (timeRange === 'выходной') return [];
+            
+            const [start, end] = timeRange.split('-').map(t => t.trim());
+            const slots = [];
+            
+            // Преобразуем время в минуты
+            const startMinutes = timeToMinutes(start);
+            const endMinutes = timeToMinutes(end);
+            
+            // Создаем слоты по 60 минут
+            for (let time = startMinutes; time < endMinutes; time += 60) {
+                slots.push(minutesToTime(time));
+            }
+            
+            return slots.slice(0, 5); // Показываем только 5 ближайших слотов
+        }
+
+        function timeToMinutes(time) {
+            const [hours, minutes] = time.split(':').map(Number);
+            return hours * 60 + (minutes || 0);
+        }
+
+        function minutesToTime(minutes) {
+            const hours = Math.floor(minutes / 60);
+            const mins = minutes % 60;
+            return `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}`;
+        }
+    </script>
+</body>
+</html>

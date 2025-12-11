@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Акции и новости - Beauty Сфера</title>
+      <!-- Фавиконки для разных устройств -->
+    <link rel="apple-touch-icon" sizes="180x180" href="images/logo/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/logo/favicon-16x16.png">
+    <link rel="manifest" href="images/logo/site.webmanifest">
+    <link rel="mask-icon" href="images/logo/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Стили для страницы акций с горизонтальным скроллом */
+        .news-page {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+        
+        .news-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .news-header .section-title {
+            margin-bottom: 0;
+        }
+        
+        .filter-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .filter-select {
+            padding: 10px 20px;
+            border: 2px solid var(--primary);
+            border-radius: 30px;
+            background: white;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            min-width: 200px;
+        }
+        
+        .news-slider-container {
+            position: relative;
+            margin: 40px -20px;
+            padding: 0 20px;
+        }
+        
+        .news-slider-wrapper {
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 20px 0 40px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) var(--light-gray);
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .news-slider-wrapper::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .news-slider-wrapper::-webkit-scrollbar-track {
+            background: var(--light-gray);
+            border-radius: 3px;
+        }
+        
+        .news-slider-wrapper::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 3px;
+        }
+        
+        .news-slider {
+            display: flex;
+            gap: 25px;
+            padding-bottom: 10px;
+            min-width: min-content;
+        }
+        
+        .news-slide {
+            flex: 0 0 350px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .news-slide:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .news-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .news-slide:hover .news-image img {
+            transform: scale(1.1);
+        }
+        
+        .news-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 8px 15px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .news-badge.promotion {
+            background-color: #ff5722;
+        }
+        
+        .news-badge.event {
+            background-color: #9C27B0;
+        }
+        
+        .news-badge.discount {
+            background-color: #FF9800;
+        }
+        
+        .news-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .news-date {
+            color: var(--primary);
+            font-size: 14px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .news-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--dark);
+            font-weight: 600;
+            line-height: 1.4;
+            flex-grow: 1;
+        }
+        
+        .news-description {
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--light-gray);
+        }
+        
+        .news-category {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .news-action {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .read-more-btn {
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 0;
+            transition: gap 0.3s ease;
+        }
+        
+        .read-more-btn:hover {
+            gap: 10px;
+        }
+        
+        .book-btn {
+            padding: 8px 20px;
+            font-size: 14px;
+        }
+        
+        .scroll-indicator {
+            text-align: center;
+            color: var(--gray);
+            font-size: 14px;
+            margin-top: 10px;
+            padding: 10px;
+            opacity: 0.8;
+            animation: fadeInOut 5s ease-in-out;
+        }
+        
+        @keyframes fadeInOut {
+            0% { opacity: 0; }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.8; }
+            100% { opacity: 0; }
+        }
+        
+        /* Стили для мобильного скролла */
+        .mobile-scroll-hint {
+            display: none;
+            text-align: center;
+            color: var(--gray);
+            font-size: 14px;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .news-slider-container {
+                margin: 30px -15px;
+                padding: 0 15px;
+            }
+            
+            .news-slide {
+                flex: 0 0 300px;
+            }
+            
+            .news-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .filter-controls {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .mobile-scroll-hint {
+                display: block;
+            }
+            
+            .scroll-indicator {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .news-slide {
+                flex: 0 0 280px;
+            }
+            
+            .news-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="../index.html" class="logo">
+                        <img src="../images/logo/logo.png" alt="Beauty Сфера" class="logo-img">
+                <span class="logo-text">
+                    <span class="logo-text">Beauty</span>
+                    <span class="logo-highlight">Сфера</span>
+                </a>
+                
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="../index.html" class="nav-link">Главная</a></li>
+                        <li><a href="services.html" class="nav-link">Услуги и цены</a></li>
+                        <li><a href="masters.html" class="nav-link">Мастера</a></li>
+                        <li><a href="booking.html" class="nav-link">Онлайн-запись</a></li>
+                        <li><a href="portfolio.html" class="nav-link">Портфолио</a></li>
+                        <li><a href="news.html" class="nav-link active">Акции</a></li>
+                        <li><a href="contacts.html" class="nav-link">Контакты</a></li>
+                        <li><a href="cabinet.html" class="nav-link cabinet-link">
+                            <i class="fas fa-user"></i> Личный кабинет
+                        </a></li>
+                    </ul>
+                </nav>
+                
+                <button class="mobile-menu-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Хлебные крошки -->
+    <div class="breadcrumbs">
+        <div class="container">
+            <a href="../index.html">Главная</a>
+            <span>/</span>
+            <span>Акции и новости</span>
+        </div>
+    </div>
+
+    <!-- Заголовок страницы -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Акции и новости</h1>
+            <p>Следите за нашими акциями, новостями и специальными предложениями</p>
+        </div>
+    </section>
+
+    <!-- Фильтры и акции с горизонтальным скроллом -->
+    <section class="news-page">
+        <div class="container">
+            <div class="news-header">
+                <h2 class="section-title">Текущие акции</h2>
+                <div class="filter-controls">
+                    <select id="news-filter" class="filter-select">
+                        <option value="all">Все акции</option>
+                        <option value="promotion">Акции</option>
+                        <option value="news">Новости</option>
+                        <option value="event">События</option>
+                        <option value="discount">Скидки</option>
+                        <option value="complex">Комплексы</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="mobile-scroll-hint">
+                ← Прокрутите в сторону →
+            </div>
+            
+            <div class="news-slider-container">
+                <div class="news-slider-wrapper" id="news-slider-wrapper">
+                    <div class="news-slider" id="news-slider">
+                        <!-- Акции загружаются через JS -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="scroll-indicator" id="scroll-indicator">
+                <span>← Прокрутите в сторону, чтобы увидеть больше акций →</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Архив акций -->
+    <section class="archive">
+        <div class="container">
+            <h2 class="section-title">Архив акций</h2>
+            <div class="archive-list" id="archive-list">
+                <!-- Архивные акции загружаются через JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Подписка на новости -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Подпишитесь на наши новости</h2>
+                <p>Получайте информацию об акциях, новых услугах и специальных предложениях первыми</p>
+                <form id="newsletter-form" class="newsletter-form">
+                    <div class="form-group">
+                        <input type="email" placeholder="Ваш email" required>
+                        <button type="submit" class="btn btn-primary">Подписаться</button>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="newsletter-agree" required>
+                        <label for="newsletter-agree">
+                            Я согласен на обработку персональных данных
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3 class="footer-title">Beauty Сфера</h3>
+                    <p class="footer-text">Профессиональная парикмахерская в Большом Камне. Создаем красоту и стиль с 2015 года.</p>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Контакты</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Улица Карла Маркса, 13а, 1 этаж</p>
+                    <p><i class="fas fa-phone"></i> +7 (423) 352-14-25</p>
+                    <p><i class="fas fa-envelope"></i> beauty-sphere@mail.ru</p>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Часы работы</h3>
+                    <p>Понедельник - Пятница: 9:00 - 20:00</p>
+                    <p>Суббота: 10:00 - 19:00</p>
+                    <p>Воскресенье: 10:00 - 18:00</p>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Быстрые ссылки</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html">Услуги и цены</a></li>
+                        <li><a href="masters.html">Наши мастера</a></li>
+                        <li><a href="booking.html">Онлайн-запись</a></li>
+                        <li><a href="news.html">Акции и новости</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Beauty Сфера. Все права защищены.</p>
+                <div class="social-links">
+                    <a href="https://vk.com/beautysphere_bk" target="_blank"><i class="fab fa-vk"></i></a>
+                    <a href="https://instagram.com/beauty_sphere_bk" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://t.me/beautysphere_bk" target="_blank"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/news.js"></script>
+</body>
+</html>

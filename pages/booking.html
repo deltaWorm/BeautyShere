@@ -1,0 +1,2086 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Онлайн-запись - Beauty Сфера</title>
+      <!-- Фавиконки для разных устройств -->
+    <link rel="apple-touch-icon" sizes="180x180" href="images/logo/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/logo/favicon-16x16.png">
+    <link rel="manifest" href="images/logo/site.webmanifest">
+    <link rel="mask-icon" href="images/logo/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Стили для страницы записи */
+        .booking-section {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+        
+        .booking-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .booking-header h1 {
+            font-size: 42px;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+        
+        .booking-header p {
+            font-size: 18px;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Секции выбора */
+        .selection-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        
+        .section-title {
+            font-size: 28px;
+            color: var(--dark);
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-light);
+        }
+        
+        /* Горизонтальные карточки услуг */
+        .services-horizontal {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 20px 10px;
+            margin-bottom: 30px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) var(--light-gray);
+        }
+        
+        .services-horizontal::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .services-horizontal::-webkit-scrollbar-track {
+            background: var(--light-gray);
+            border-radius: 4px;
+        }
+        
+        .services-horizontal::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+        
+        .service-card-horizontal {
+            min-width: 280px;
+            background: white;
+            border: 2px solid var(--light-gray);
+            border-radius: 12px;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+            position: relative;
+        }
+        
+        .service-card-horizontal:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .service-card-horizontal.selected {
+            background: rgba(44, 140, 153, 0.05);
+            border-color: var(--primary);
+            border-left: 5px solid var(--primary);
+        }
+        
+        .service-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .service-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--dark);
+            margin: 0;
+        }
+        
+        .service-price {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 20px;
+            white-space: nowrap;
+        }
+        
+        .service-category {
+            display: inline-block;
+            padding: 5px 15px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .service-description {
+            color: var(--gray);
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        
+        .service-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .service-duration {
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        .service-select-indicator {
+            width: 25px;
+            height: 25px;
+            border: 2px solid var(--light-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .service-card-horizontal.selected .service-select-indicator {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        /* Горизонтальные карточки мастеров */
+        .masters-horizontal {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 20px 10px;
+            margin-bottom: 30px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) var(--light-gray);
+        }
+        
+        .master-card-horizontal {
+            min-width: 280px;
+            background: white;
+            border: 2px solid var(--light-gray);
+            border-radius: 12px;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .master-card-horizontal:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .master-card-horizontal.selected {
+            background: rgba(44, 140, 153, 0.05);
+            border-color: var(--primary);
+            border-left: 5px solid var(--primary);
+        }
+        
+        .master-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+        
+        .master-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        
+        .master-specialty {
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .master-experience {
+            color: var(--gray);
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+        
+        .master-rating {
+            color: #FFD700;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .master-select-indicator {
+            width: 25px;
+            height: 25px;
+            border: 2px solid var(--light-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            margin: 0 auto;
+        }
+        
+        .master-card-horizontal.selected .master-select-indicator {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        /* Выбор даты и времени */
+        .datetime-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .calendar-container, .time-container {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid var(--light-gray);
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .calendar-nav-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--light-gray);
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .calendar-nav-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .calendar-month {
+            font-weight: 600;
+            font-size: 18px;
+            color: var(--dark);
+        }
+        
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .weekday {
+            text-align: center;
+            font-weight: 600;
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+        
+        .calendar-day {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .calendar-day:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+        
+        .calendar-day.selected {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .calendar-day.disabled {
+            color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .calendar-day.disabled:hover {
+            background: transparent;
+            color: #ccc;
+        }
+        
+        .calendar-day.today {
+            border: 2px solid var(--primary);
+        }
+        
+        .time-slots-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .time-slot {
+            padding: 12px;
+            background: white;
+            border: 2px solid var(--light-gray);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .time-slot:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .time-slot.selected {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+        
+        .time-slot.disabled {
+            background: #f8f9fa;
+            color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .time-slot.disabled:hover {
+            border-color: var(--light-gray);
+            color: #ccc;
+        }
+        
+        /* Сводка и форма */
+        .confirmation-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .summary-card {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .summary-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+        
+        .summary-content {
+            color: var(--gray);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .summary-total {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .total-label {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .total-price {
+            font-size: 32px;
+            font-weight: 700;
+        }
+        
+        /* Форма клиента */
+        .client-form {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 15px;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 15px;
+            border: 2px solid var(--light-gray);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(44, 140, 153, 0.1);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .form-group .error {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .form-group.error input,
+        .form-group.error textarea {
+            border-color: #e74c3c;
+        }
+        
+        .form-group.error .error {
+            display: block;
+        }
+        
+        /* Кнопки */
+        .booking-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .btn-booking {
+            padding: 16px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .btn-booking-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-booking-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(44, 140, 153, 0.3);
+        }
+        
+        /* Успешное сообщение */
+        .success-message {
+            background: white;
+            border-radius: 15px;
+            padding: 60px 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin: 40px 0;
+            display: none;
+        }
+        
+        .success-icon {
+            font-size: 80px;
+            color: #27ae60;
+            margin-bottom: 30px;
+        }
+        
+        .success-title {
+            font-size: 32px;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+        
+        .success-text {
+            font-size: 18px;
+            color: var(--gray);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .success-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        /* Кнопка "Мои записи" и окно просмотра */
+        .view-appointments-btn {
+            position: fixed;
+            top: 120px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 25px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(44, 140, 153, 0.4);
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+        
+        .view-appointments-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(44, 140, 153, 0.6);
+        }
+        
+        .appointments-preview {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            width: 350px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            z-index: 1000;
+            overflow: hidden;
+            display: none;
+            border: 1px solid var(--light-gray);
+        }
+        
+        .appointments-preview.active {
+            display: block;
+            animation: slideInRight 0.3s ease;
+        }
+        
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .preview-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .preview-header h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+        
+        .close-preview {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+        }
+        
+        .preview-content {
+            padding: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .appointment-item {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 3px solid var(--primary);
+        }
+        
+        .appointment-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .appointment-item h4 {
+            margin: 0 0 10px 0;
+            color: var(--dark);
+            font-size: 16px;
+        }
+        
+        .appointment-item p {
+            margin: 5px 0;
+            color: var(--gray);
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .appointment-item p i {
+            width: 16px;
+            color: var(--primary);
+        }
+        
+        .appointment-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .appointment-actions .btn {
+            flex: 1;
+            padding: 6px 10px;
+            font-size: 12px;
+        }
+        
+        .preview-footer {
+            padding: 15px 20px;
+            text-align: center;
+            border-top: 1px solid var(--light-gray);
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            .datetime-selector {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .booking-header h1 {
+                font-size: 32px;
+            }
+            
+            .selection-section,
+            .confirmation-section,
+            .client-form {
+                padding: 30px 20px;
+            }
+            
+            .service-card-horizontal,
+            .master-card-horizontal {
+                min-width: 250px;
+            }
+            
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .booking-actions {
+                flex-direction: column;
+            }
+            
+            .btn-booking {
+                width: 100%;
+            }
+            
+            .success-actions {
+                flex-direction: column;
+            }
+            
+            .appointments-preview {
+                width: 90%;
+                right: 5%;
+                left: 5%;
+            }
+            
+            .view-appointments-btn {
+                top: 100px;
+                right: 10px;
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .booking-header h1 {
+                font-size: 28px;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+            
+            .service-card-horizontal,
+            .master-card-horizontal {
+                min-width: 220px;
+                padding: 20px;
+            }
+            
+            .calendar-container,
+            .time-container {
+                padding: 20px;
+            }
+            
+            .time-slots-container {
+                grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Кнопка "Мои записи" -->
+    <button class="view-appointments-btn" id="viewAppointmentsBtn">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Мои записи</span>
+    </button>
+
+    <!-- Окно просмотра записей -->
+    <div class="appointments-preview" id="appointmentsPreview">
+        <div class="preview-header">
+            <h3>Мои записи</h3>
+            <button class="close-preview" id="closePreview">&times;</button>
+        </div>
+        <div class="preview-content" id="previewContent">
+            <!-- Записи загружаются через JS -->
+        </div>
+        <div class="preview-footer">
+            <a href="cabinet.html" class="btn btn-outline">Все записи в кабинете</a>
+        </div>
+    </div>
+
+    <!-- Шапка -->
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="../index.html" class="logo">
+                         <img src="../images/logo/logo.png" alt="Beauty Сфера" class="logo-img">
+                <span class="logo-text">
+                    <span class="logo-text">Beauty</span>
+                    <span class="logo-highlight">Сфера</span>
+                </a>
+                
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="../index.html" class="nav-link">Главная</a></li>
+                        <li><a href="services.html" class="nav-link">Услуги и цены</a></li>
+                        <li><a href="masters.html" class="nav-link">Мастера</a></li>
+                        <li><a href="booking.html" class="nav-link active">Онлайн-запись</a></li>
+                        <li><a href="portfolio.html" class="nav-link">Портфолио</a></li>
+                        <li><a href="news.html" class="nav-link">Акции</a></li>
+                        <li><a href="contacts.html" class="nav-link">Контакты</a></li>
+                        <li><a href="cabinet.html" class="nav-link cabinet-link">
+                            <i class="fas fa-user"></i> Личный кабинет
+                        </a></li>
+                    </ul>
+                </nav>
+                
+                <button class="mobile-menu-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Хлебные крошки -->
+    <div class="breadcrumbs">
+        <div class="container">
+            <a href="../index.html">Главная</a>
+            <span>/</span>
+            <span>Онлайн-запись</span>
+        </div>
+    </div>
+
+    <!-- Заголовок страницы -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Онлайн-запись</h1>
+            <p>Запишитесь на прием к нашим мастерам в удобное для вас время</p>
+        </div>
+    </section>
+
+    <!-- Форма записи -->
+    <section class="booking-section">
+        <div class="container">
+            <!-- Выбор услуг -->
+            <div class="selection-section" id="servicesSection">
+                <h2 class="section-title">1. Выберите услуги</h2>
+                <div class="services-horizontal" id="servicesHorizontal">
+                    <!-- Услуги загружаются через JS -->
+                </div>
+                <div class="selected-count" id="selectedCount" style="text-align: center; margin-top: 20px; color: var(--primary); font-weight: 600; display: none;">
+                    Выбрано: <span id="selectedServicesCount">0</span> услуг
+                </div>
+            </div>
+
+            <!-- Выбор мастера -->
+            <div class="selection-section" id="mastersSection">
+                <h2 class="section-title">2. Выберите мастера</h2>
+                <div class="masters-horizontal" id="mastersHorizontal">
+                    <!-- Мастера загружаются через JS -->
+                </div>
+                <div class="selected-master" id="selectedMasterInfo" style="text-align: center; margin-top: 20px; color: var(--primary); font-weight: 600; display: none;">
+                    Выбран: <span id="masterName">-</span>
+                </div>
+            </div>
+
+            <!-- Выбор даты и времени -->
+            <div class="selection-section" id="datetimeSection">
+                <h2 class="section-title">3. Выберите дату и время</h2>
+                <div class="datetime-selector">
+                    <div class="calendar-container">
+                        <div class="calendar-header">
+                            <button class="calendar-nav-btn" id="prevMonth">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <div class="calendar-month" id="currentMonth"></div>
+                            <button class="calendar-nav-btn" id="nextMonth">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        <div class="calendar-weekdays">
+                            <div class="weekday">Пн</div>
+                            <div class="weekday">Вт</div>
+                            <div class="weekday">Ср</div>
+                            <div class="weekday">Чт</div>
+                            <div class="weekday">Пт</div>
+                            <div class="weekday">Сб</div>
+                            <div class="weekday">Вс</div>
+                        </div>
+                        <div class="calendar-days" id="calendarDays">
+                            <!-- Дни будут сгенерированы через JS -->
+                        </div>
+                    </div>
+                    
+                    <div class="time-container">
+                        <h3 style="margin-bottom: 20px;">Выберите время</h3>
+                        <div id="selectedDate" style="color: var(--primary); font-weight: 600; margin-bottom: 20px;">
+                            Дата не выбрана
+                        </div>
+                        <div class="time-slots-container" id="timeSlots">
+                            <!-- Временные слоты будут сгенерированы через JS -->
+                        </div>
+                    </div>
+                </div>
+                <div class="selected-datetime" id="selectedDateTimeInfo" style="text-align: center; margin-top: 20px; color: var(--primary); font-weight: 600; display: none;">
+                    Выбрано: <span id="datetimeValue">-</span>
+                </div>
+            </div>
+
+            <!-- Сводка и форма -->
+            <div class="confirmation-section">
+                <h2 class="section-title">4. Подтверждение записи</h2>
+                
+                <div class="summary-grid" id="summaryGrid">
+                    <!-- Сводка будет заполнена через JS -->
+                </div>
+                
+                <div class="summary-total">
+                    <div class="total-label">Общая стоимость:</div>
+                    <div class="total-price" id="totalPrice">0 руб.</div>
+                </div>
+            </div>
+
+            <!-- Форма клиента -->
+            <div class="client-form">
+                <h2 class="section-title">5. Ваши контактные данные</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="clientName">Имя *</label>
+                        <input type="text" id="clientName" required placeholder="Введите ваше имя">
+                        <div class="error" id="nameError">Пожалуйста, введите ваше имя</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="clientPhone">Телефон *</label>
+                        <input type="tel" id="clientPhone" required placeholder="+7 (___) ___-__-__">
+                        <div class="error" id="phoneError">Пожалуйста, введите корректный номер телефона</div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="clientEmail">Email</label>
+                    <input type="email" id="clientEmail" placeholder="example@mail.ru">
+                    <div class="error" id="emailError">Пожалуйста, введите корректный email</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="clientComment">Комментарий к записи</label>
+                    <textarea id="clientComment" placeholder="Дополнительные пожелания или информация"></textarea>
+                </div>
+                
+                <div class="booking-actions">
+                    <button type="button" class="btn-booking btn-booking-primary" id="confirmBooking">
+                        <i class="fas fa-check-circle"></i> Подтвердить запись
+                    </button>
+                </div>
+            </div>
+
+            <!-- Успешное сообщение -->
+            <div class="success-message" id="successMessage">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2 class="success-title">Запись успешно оформлена!</h2>
+                <p class="success-text">
+                    Мы отправили подтверждение на ваш email. Пожалуйста, приходите за 10 минут 
+                    до назначенного времени. В случае изменений свяжитесь с нами по телефону.
+                </p>
+                <div class="success-actions">
+                    <a href="cabinet.html" class="btn btn-primary">
+                        <i class="fas fa-user"></i> Перейти в личный кабинет
+                    </a>
+                    <a href="../index.html" class="btn btn-outline">
+                        <i class="fas fa-home"></i> На главную
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3 class="footer-title">Beauty Сфера</h3>
+                    <p class="footer-text">Профессиональная парикмахерская в Большом Камне. Создаем красоту и стиль с 2015 года.</p>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Контакты</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Улица Карла Маркса, 13а, 1 этаж</p>
+                    <p><i class="fas fa-phone"></i> +7 (423) 352-14-25</p>
+                    <p><i class="fas fa-envelope"></i> beauty-sphere@mail.ru</p>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Часы работы</h3>
+                    <p>Понедельник - Пятница: 9:00 - 20:00</p>
+                    <p>Суббота: 10:00 - 19:00</p>
+                    <p>Воскресенье: 10:00 - 18:00</p>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Быстрые ссылки</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html">Услуги и цены</a></li>
+                        <li><a href="masters.html">Наши мастера</a></li>
+                        <li><a href="booking.html">Онлайн-запись</a></li>
+                        <li><a href="news.html">Акции и новости</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Beauty Сфера. Все права защищены.</p>
+                <div class="social-links">
+                    <a href="https://vk.com/beautysphere_bk" target="_blank"><i class="fab fa-vk"></i></a>
+                    <a href="https://instagram.com/beauty_sphere_bk" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://t.me/beautysphere_bk" target="_blank"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/data.js"></script>
+    <script>
+        // Глобальные переменные для записи
+        let bookingData = {
+            services: [],
+            master: null,
+            date: null,
+            time: null,
+            client: {},
+            totalPrice: 0
+        };
+        
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            initBookingPage();
+            setupEventListeners();
+            loadAppointmentsPreview();
+            
+            // Автозаполнение данных пользователя если он авторизован
+            const user = getAuthState();
+            if (user) {
+                if (user.name) {
+                    document.getElementById('clientName').value = user.name;
+                }
+                if (user.email) {
+                    document.getElementById('clientEmail').value = user.email;
+                }
+                if (user.phone) {
+                    document.getElementById('clientPhone').value = user.phone;
+                }
+            }
+        });
+        
+        // Получение состояния авторизации (исправленная версия)
+        function getAuthState() {
+            const userData = localStorage.getItem('beauty-sphere-user');
+            if (!userData) return null;
+            
+            try {
+                const user = JSON.parse(userData);
+                // Проверяем, что данные валидны
+                if (user && (user.name || user.email)) {
+                    return user;
+                }
+                return null;
+            } catch (error) {
+                console.error('Ошибка парсинга данных пользователя:', error);
+                return null;
+            }
+        }
+        
+        // Инициализация страницы записи
+        function initBookingPage() {
+            // Сброс данных
+            bookingData = {
+                services: [],
+                master: null,
+                date: null,
+                time: null,
+                client: {},
+                totalPrice: 0
+            };
+            
+            // Загрузка услуг и мастеров
+            loadServices();
+            loadMasters();
+            initCalendar();
+            
+            // Установка минимальной даты (сегодня + 1 день)
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            bookingData.date = tomorrow.toISOString().split('T')[0];
+            updateSelectedDateDisplay(bookingData.date);
+            
+            // Генерация временных слотов
+            generateTimeSlots();
+        }
+        
+        // Загрузка услуг
+        async function loadServices() {
+            try {
+                const services = await window.beautySphereData.getServices();
+                displayServices(services);
+            } catch (error) {
+                console.error('Ошибка загрузки услуг:', error);
+                document.getElementById('servicesHorizontal').innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: var(--gray); width: 100%;">
+                        <p>Не удалось загрузить услуги. Пожалуйста, попробуйте позже.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Отображение услуг
+        function displayServices(services) {
+            const container = document.getElementById('servicesHorizontal');
+            
+            container.innerHTML = services.map(service => `
+                <div class="service-card-horizontal" data-service-id="${service.id}" data-service-price="${service.price}">
+                    <div class="service-header">
+                        <h3 class="service-name">${service.name}</h3>
+                        <div class="service-price">${service.price} руб.</div>
+                    </div>
+                    <div class="service-category">${service.category}</div>
+                    <p class="service-description">${service.description}</p>
+                    <div class="service-footer">
+                        <div class="service-duration">${service.duration} минут</div>
+                        <div class="service-select-indicator">
+                            <i class="fas fa-check"></i>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            setupServiceSelection();
+        }
+        
+        // Настройка выбора услуг
+        function setupServiceSelection() {
+            document.querySelectorAll('.service-card-horizontal').forEach(card => {
+                card.addEventListener('click', function() {
+                    const serviceId = parseInt(this.dataset.serviceId);
+                    const serviceName = this.querySelector('.service-name').textContent;
+                    const servicePrice = parseInt(this.dataset.servicePrice);
+                    const serviceCategory = this.querySelector('.service-category').textContent;
+                    
+                    // Проверяем, выбрана ли уже эта услуга
+                    const isSelected = this.classList.contains('selected');
+                    
+                    if (!isSelected) {
+                        // Добавляем услугу
+                        this.classList.add('selected');
+                        bookingData.services.push({
+                            id: serviceId,
+                            name: serviceName,
+                            price: servicePrice,
+                            category: serviceCategory
+                        });
+                    } else {
+                        // Убираем услугу
+                        this.classList.remove('selected');
+                        bookingData.services = bookingData.services.filter(service => service.id !== serviceId);
+                    }
+                    
+                    updateSelectedCount();
+                    updateSummary();
+                });
+            });
+        }
+        
+        // Обновление счетчика выбранных услуг
+        function updateSelectedCount() {
+            const count = bookingData.services.length;
+            const countElement = document.getElementById('selectedServicesCount');
+            const container = document.getElementById('selectedCount');
+            
+            countElement.textContent = count;
+            
+            if (count > 0) {
+                container.style.display = 'block';
+            } else {
+                container.style.display = 'none';
+            }
+        }
+        
+        // Загрузка мастеров
+        async function loadMasters() {
+            try {
+                const masters = await window.beautySphereData.getMasters();
+                displayMasters(masters);
+            } catch (error) {
+                console.error('Ошибка загрузки мастеров:', error);
+                document.getElementById('mastersHorizontal').innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: var(--gray); width: 100%;">
+                        <p>Не удалось загрузить мастеров. Пожалуйста, попробуйте позже.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Отображение мастеров
+        function displayMasters(masters) {
+            const container = document.getElementById('mastersHorizontal');
+            
+            container.innerHTML = masters.map(master => {
+                const initials = master.name.split(' ').map(word => word[0]).join('').toUpperCase();
+                const rating = master.rating || 4.5;
+                
+                return `
+                    <div class="master-card-horizontal" data-master-id="${master.id}">
+                        <div class="master-avatar">${initials}</div>
+                        <h3 class="master-name">${master.name}</h3>
+                        <div class="master-specialty">${master.specialization}</div>
+                        <div class="master-experience">Опыт: ${master.experience}</div>
+                        <div class="master-rating">
+                            ${'★'.repeat(Math.floor(rating))}${'☆'.repeat(5 - Math.floor(rating))}
+                            <span style="color: var(--gray); margin-left: 5px;">${rating.toFixed(1)}</span>
+                        </div>
+                        <div class="master-select-indicator">
+                            <i class="fas fa-check"></i>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            setupMasterSelection();
+        }
+        
+        // Настройка выбора мастера
+        function setupMasterSelection() {
+            document.querySelectorAll('.master-card-horizontal').forEach(card => {
+                card.addEventListener('click', function() {
+                    const masterId = parseInt(this.dataset.masterId);
+                    const masterName = this.querySelector('.master-name').textContent;
+                    const masterSpecialty = this.querySelector('.master-specialty').textContent;
+                    
+                    // Снимаем выделение с других мастеров
+                    document.querySelectorAll('.master-card-horizontal').forEach(c => {
+                        c.classList.remove('selected');
+                    });
+                    
+                    // Выделяем выбранного мастера
+                    this.classList.add('selected');
+                    
+                    bookingData.master = {
+                        id: masterId,
+                        name: masterName,
+                        specialization: masterSpecialty
+                    };
+                    
+                    updateSelectedMasterInfo();
+                    updateSummary();
+                });
+            });
+        }
+        
+        // Обновление информации о выбранном мастере
+        function updateSelectedMasterInfo() {
+            const infoElement = document.getElementById('selectedMasterInfo');
+            const nameElement = document.getElementById('masterName');
+            
+            if (bookingData.master) {
+                nameElement.textContent = bookingData.master.name;
+                infoElement.style.display = 'block';
+            } else {
+                infoElement.style.display = 'none';
+            }
+        }
+        
+        // Инициализация календаря
+        function initCalendar() {
+            const today = new Date();
+            const currentMonth = today.getMonth();
+            const currentYear = today.getFullYear();
+            
+            renderCalendar(currentMonth, currentYear);
+            setupCalendarNavigation();
+        }
+        
+        // Отрисовка календаря
+        function renderCalendar(month, year) {
+            const calendarDays = document.getElementById('calendarDays');
+            const monthNames = [
+                'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
+                'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
+            ];
+            
+            // Обновляем заголовок месяца
+            document.getElementById('currentMonth').textContent = `${monthNames[month]} ${year}`;
+            
+            // Очищаем календарь
+            calendarDays.innerHTML = '';
+            
+            // Получаем первый день месяца
+            const firstDay = new Date(year, month, 1);
+            // Получаем количество дней в месяце
+            const lastDay = new Date(year, month + 1, 0);
+            const daysInMonth = lastDay.getDate();
+            
+            // Получаем день недели первого дня месяца
+            const firstDayOfWeek = firstDay.getDay();
+            // Корректируем для отображения с понедельника
+            const adjustedFirstDayOfWeek = firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1;
+            
+            // Добавляем пустые ячейки для дней предыдущего месяца
+            for (let i = 0; i < adjustedFirstDayOfWeek; i++) {
+                const emptyDay = document.createElement('div');
+                emptyDay.className = 'calendar-day disabled';
+                calendarDays.appendChild(emptyDay);
+            }
+            
+            // Добавляем дни месяца
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                dayElement.textContent = day;
+                dayElement.dataset.date = `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+                
+                // Проверяем, является ли день сегодняшним
+                const currentDate = new Date(year, month, day);
+                if (currentDate.getTime() === today.getTime()) {
+                    dayElement.classList.add('today');
+                }
+                
+                // Делаем недоступными прошедшие даты
+                if (currentDate < today) {
+                    dayElement.classList.add('disabled');
+                    dayElement.style.cursor = 'not-allowed';
+                    dayElement.style.opacity = '0.5';
+                } else {
+                    dayElement.addEventListener('click', () => selectDate(dayElement.dataset.date));
+                }
+                
+                // Выделяем выбранную дату
+                if (bookingData.date === dayElement.dataset.date) {
+                    dayElement.classList.add('selected');
+                }
+                
+                calendarDays.appendChild(dayElement);
+            }
+        }
+        
+        // Настройка навигации календаря
+        function setupCalendarNavigation() {
+            let currentMonth = new Date().getMonth();
+            let currentYear = new Date().getFullYear();
+            
+            document.getElementById('prevMonth').addEventListener('click', () => {
+                currentMonth--;
+                if (currentMonth < 0) {
+                    currentMonth = 11;
+                    currentYear--;
+                }
+                renderCalendar(currentMonth, currentYear);
+            });
+            
+            document.getElementById('nextMonth').addEventListener('click', () => {
+                currentMonth++;
+                if (currentMonth > 11) {
+                    currentMonth = 0;
+                    currentYear++;
+                }
+                renderCalendar(currentMonth, currentYear);
+            });
+        }
+        
+        // Выбор даты
+        function selectDate(date) {
+            // Снимаем выделение с предыдущей даты
+            document.querySelectorAll('.calendar-day.selected').forEach(day => {
+                day.classList.remove('selected');
+            });
+            
+            // Выделяем выбранную дату
+            const selectedDay = document.querySelector(`.calendar-day[data-date="${date}"]`);
+            if (selectedDay && !selectedDay.classList.contains('disabled')) {
+                selectedDay.classList.add('selected');
+                bookingData.date = date;
+                updateSelectedDateDisplay(date);
+                generateTimeSlots();
+                updateSelectedDateTimeInfo();
+            }
+        }
+        
+        // Обновление отображения выбранной даты
+        function updateSelectedDateDisplay(date) {
+            const dateObj = new Date(date);
+            const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+            const formattedDate = dateObj.toLocaleDateString('ru-RU', options);
+            document.getElementById('selectedDate').textContent = formattedDate;
+        }
+        
+        // Генерация временных слотов
+        function generateTimeSlots() {
+            const timeSlotsContainer = document.getElementById('timeSlots');
+            timeSlotsContainer.innerHTML = '';
+            
+            // Проверяем, выбрана ли дата
+            if (!bookingData.date) {
+                timeSlotsContainer.innerHTML = '<p style="color: var(--gray); text-align: center;">Сначала выберите дату</p>';
+                return;
+            }
+            
+            // Проверяем, является ли выбранная дата сегодняшним днем
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const selectedDate = new Date(bookingData.date);
+            
+            // Определяем начальное время
+            let startHour = 9; // 9:00
+            if (selectedDate.getTime() === today.getTime()) {
+                // Если выбрана сегодняшняя дата, начинаем с текущего часа + 2 часа
+                const currentHour = today.getHours();
+                startHour = Math.min(Math.max(currentHour + 2, 9), 18);
+            }
+            
+            // Генерация слотов с 9:00 до 20:00 с шагом 30 минут
+            for (let hour = startHour; hour < 20; hour++) {
+                for (let minute = 0; minute < 60; minute += 30) {
+                    const time = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+                    const timeSlot = document.createElement('div');
+                    timeSlot.className = 'time-slot';
+                    timeSlot.textContent = time;
+                    timeSlot.dataset.time = time;
+                    
+                    // Проверяем, не является ли время прошедшим для текущего дня
+                    if (selectedDate.getTime() === today.getTime()) {
+                        const currentTime = new Date();
+                        const slotTime = new Date();
+                        slotTime.setHours(hour, minute, 0, 0);
+                        
+                        if (slotTime < currentTime) {
+                            timeSlot.classList.add('disabled');
+                            timeSlot.style.cursor = 'not-allowed';
+                            timeSlot.style.opacity = '0.5';
+                        } else {
+                            timeSlot.addEventListener('click', () => selectTime(time));
+                        }
+                    } else {
+                        timeSlot.addEventListener('click', () => selectTime(time));
+                    }
+                    
+                    // Выделяем выбранное время
+                    if (bookingData.time === time) {
+                        timeSlot.classList.add('selected');
+                    }
+                    
+                    timeSlotsContainer.appendChild(timeSlot);
+                }
+            }
+        }
+        
+        // Выбор времени
+        function selectTime(time) {
+            // Снимаем выделение с предыдущего времени
+            document.querySelectorAll('.time-slot.selected').forEach(slot => {
+                slot.classList.remove('selected');
+            });
+            
+            // Выделяем выбранное время
+            const selectedSlot = document.querySelector(`.time-slot[data-time="${time}"]`);
+            if (selectedSlot && !selectedSlot.classList.contains('disabled')) {
+                selectedSlot.classList.add('selected');
+                bookingData.time = time;
+                updateSelectedDateTimeInfo();
+            }
+        }
+        
+        // Обновление информации о выбранной дате и времени
+        function updateSelectedDateTimeInfo() {
+            const infoElement = document.getElementById('selectedDateTimeInfo');
+            const valueElement = document.getElementById('datetimeValue');
+            
+            if (bookingData.date && bookingData.time) {
+                const dateObj = new Date(bookingData.date);
+                const options = { day: 'numeric', month: 'long' };
+                const formattedDate = dateObj.toLocaleDateString('ru-RU', options);
+                valueElement.textContent = `${formattedDate}, ${bookingData.time}`;
+                infoElement.style.display = 'block';
+            } else {
+                infoElement.style.display = 'none';
+            }
+        }
+        
+        // Обновление сводки
+        function updateSummary() {
+            const summaryGrid = document.getElementById('summaryGrid');
+            const totalPriceElement = document.getElementById('totalPrice');
+            
+            // Рассчитываем общую стоимость
+            let totalPrice = 0;
+            
+            // Услуги
+            let servicesHTML = '';
+            if (bookingData.services.length > 0) {
+                servicesHTML = bookingData.services.map(service => `
+                    <div style="margin-bottom: 10px; display: flex; justify-content: space-between;">
+                        <span>${service.name}</span>
+                        <span style="font-weight: 600;">${service.price} руб.</span>
+                    </div>
+                `).join('');
+                totalPrice += bookingData.services.reduce((sum, service) => sum + service.price, 0);
+            } else {
+                servicesHTML = '<p style="color: var(--gray);">Услуги не выбраны</p>';
+            }
+            
+            // Мастер
+            let masterHTML = '';
+            if (bookingData.master) {
+                masterHTML = `
+                    <div style="margin-bottom: 5px; font-weight: 600;">${bookingData.master.name}</div>
+                    <div style="color: var(--gray); font-size: 14px;">${bookingData.master.specialization}</div>
+                `;
+            } else {
+                masterHTML = '<p style="color: var(--gray);">Мастер не выбран</p>';
+            }
+            
+            // Дата и время
+            let datetimeHTML = '';
+            if (bookingData.date && bookingData.time) {
+                const dateObj = new Date(bookingData.date);
+                const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+                const formattedDate = dateObj.toLocaleDateString('ru-RU', options);
+                datetimeHTML = `
+                    <div style="margin-bottom: 5px; font-weight: 600;">${formattedDate}</div>
+                    <div style="color: var(--gray); font-size: 14px;">${bookingData.time}</div>
+                `;
+            } else {
+                datetimeHTML = '<p style="color: var(--gray);">Дата и время не выбраны</p>';
+            }
+            
+            // Обновляем сетку сводки
+            summaryGrid.innerHTML = `
+                <div class="summary-card">
+                    <div class="summary-title">Выбранные услуги</div>
+                    <div class="summary-content">${servicesHTML}</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-title">Мастер</div>
+                    <div class="summary-content">${masterHTML}</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-title">Дата и время</div>
+                    <div class="summary-content">${datetimeHTML}</div>
+                </div>
+            `;
+            
+            // Обновляем общую стоимость
+            bookingData.totalPrice = totalPrice;
+            totalPriceElement.textContent = `${totalPrice} руб.`;
+        }
+        
+        // Настройка обработчиков событий
+        function setupEventListeners() {
+            // Подтверждение записи
+            document.getElementById('confirmBooking').addEventListener('click', confirmBooking);
+            
+            // Кнопка "Мои записи"
+            const viewAppointmentsBtn = document.getElementById('viewAppointmentsBtn');
+            const appointmentsPreview = document.getElementById('appointmentsPreview');
+            const closePreview = document.getElementById('closePreview');
+            
+            viewAppointmentsBtn.addEventListener('click', function() {
+                appointmentsPreview.classList.add('active');
+                loadAppointmentsPreview();
+            });
+            
+            closePreview.addEventListener('click', function() {
+                appointmentsPreview.classList.remove('active');
+            });
+            
+            // Закрытие по клику вне окна
+            document.addEventListener('click', function(event) {
+                if (!appointmentsPreview.contains(event.target) && 
+                    !viewAppointmentsBtn.contains(event.target) &&
+                    appointmentsPreview.classList.contains('active')) {
+                    appointmentsPreview.classList.remove('active');
+                }
+            });
+            
+            // Маска для телефона
+            const phoneInput = document.getElementById('clientPhone');
+            phoneInput.addEventListener('input', function(e) {
+                let value = this.value.replace(/\D/g, '');
+                
+                if (value.startsWith('7') || value.startsWith('8')) {
+                    value = value.substring(1);
+                }
+                
+                if (value.length > 0) {
+                    let formatted = '+7 ';
+                    if (value.length > 0) formatted += '(' + value.substring(0, 3);
+                    if (value.length > 3) formatted += ') ' + value.substring(3, 6);
+                    if (value.length > 6) formatted += '-' + value.substring(6, 8);
+                    if (value.length > 8) formatted += '-' + value.substring(8, 10);
+                    
+                    this.value = formatted;
+                }
+            });
+        }
+        
+        // Подтверждение записи
+        function confirmBooking() {
+            // Проверяем, что выбраны услуги
+            if (bookingData.services.length === 0) {
+                alert('Пожалуйста, выберите хотя бы одну услугу');
+                document.getElementById('servicesSection').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+            
+            // Проверяем, что выбран мастер
+            if (!bookingData.master) {
+                alert('Пожалуйста, выберите мастера');
+                document.getElementById('mastersSection').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+            
+            // Проверяем, что выбраны дата и время
+            if (!bookingData.date || !bookingData.time) {
+                alert('Пожалуйста, выберите дату и время');
+                document.getElementById('datetimeSection').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+            
+            // Собираем данные клиента
+            bookingData.client = {
+                name: document.getElementById('clientName').value.trim(),
+                phone: document.getElementById('clientPhone').value.trim(),
+                email: document.getElementById('clientEmail').value.trim(),
+                comment: document.getElementById('clientComment').value.trim()
+            };
+            
+            // Валидация данных клиента
+            if (!validateClientData()) {
+                return;
+            }
+            
+            // Создаем объект записи
+            const appointment = {
+                id: Date.now(),
+                ...bookingData,
+                status: 'confirmed',
+                createdAt: new Date().toISOString(),
+                totalPrice: bookingData.totalPrice
+            };
+            
+            // Сохраняем запись
+            saveAppointment(appointment);
+            
+            // Показываем сообщение об успехе
+            showSuccessMessage();
+            
+            // Обновляем список записей
+            loadAppointmentsPreview();
+        }
+        
+        // Валидация данных клиента
+        function validateClientData() {
+            const name = document.getElementById('clientName').value.trim();
+            const phone = document.getElementById('clientPhone').value.trim();
+            const email = document.getElementById('clientEmail').value.trim();
+            
+            let isValid = true;
+            
+            // Валидация имени
+            if (!name) {
+                showError('clientName', 'Пожалуйста, введите ваше имя');
+                isValid = false;
+            } else {
+                clearError('clientName');
+            }
+            
+            // Валидация телефона
+            const phoneDigits = phone.replace(/\D/g, '');
+            if (!phoneDigits || phoneDigits.length < 10) {
+                showError('clientPhone', 'Пожалуйста, введите корректный номер телефона');
+                isValid = false;
+            } else {
+                clearError('clientPhone');
+            }
+            
+            // Валидация email (если заполнен)
+            if (email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    showError('clientEmail', 'Пожалуйста, введите корректный email');
+                    isValid = false;
+                } else {
+                    clearError('clientEmail');
+                }
+            }
+            
+            return isValid;
+        }
+        
+        // Показать ошибку
+        function showError(fieldId, message) {
+            const field = document.getElementById(fieldId);
+            const errorElement = document.getElementById(fieldId + 'Error');
+            const formGroup = field.closest('.form-group');
+            
+            formGroup.classList.add('error');
+            errorElement.textContent = message;
+            
+            // Прокручиваем к полю с ошибкой
+            field.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            field.focus();
+        }
+        
+        // Очистить ошибку
+        function clearError(fieldId) {
+            const field = document.getElementById(fieldId);
+            const formGroup = field.closest('.form-group');
+            formGroup.classList.remove('error');
+        }
+        
+      // Сохранение записи
+function saveAppointment(appointment) {
+    // Получаем существующие записи
+    let appointments = JSON.parse(localStorage.getItem('beautySphereAppointments') || '[]');
+    
+    // Получаем данные пользователя для связи
+    const user = getAuthState();
+    
+    // Добавляем информацию о пользователе к записи
+    if (user) {
+        appointment.userId = user.id;
+        appointment.clientEmail = user.email;
+    }
+    
+    // Если пользователь не авторизован, но указал email в форме
+    if (!appointment.userId && appointment.client && appointment.client.email) {
+        appointment.clientEmail = appointment.client.email;
+    }
+    
+    // Добавляем новую запись
+    appointments.push(appointment);
+    
+    // Сохраняем обратно в localStorage
+    localStorage.setItem('beautySphereAppointments', JSON.stringify(appointments));
+    
+    // Сохраняем также в истории пользователя
+    if (user && user.id) {
+        saveToUserHistory(appointment);
+    }
+    
+    console.log('Запись сохранена:', appointment);
+}
+
+// Сохранение в историю пользователя
+function saveToUserHistory(appointment) {
+    const user = getAuthState();
+    if (!user || !user.id) return;
+    
+    // Получаем историю пользователя
+    let userHistory = JSON.parse(localStorage.getItem(`user-${user.id}-history`) || '[]');
+    
+    // Добавляем запись в историю
+    const historyItem = {
+        ...appointment,
+        addedToHistory: new Date().toISOString()
+    };
+    
+    userHistory.push(historyItem);
+    
+    // Сохраняем историю пользователя
+    localStorage.setItem(`user-${user.id}-history`, JSON.stringify(userHistory));
+}
+        
+        // Показать сообщение об успехе
+        function showSuccessMessage() {
+            const formSections = document.querySelectorAll('.selection-section, .confirmation-section, .client-form');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Скрываем все секции формы
+            formSections.forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Показываем сообщение об успехе
+            successMessage.style.display = 'block';
+            
+            // Прокручиваем к сообщению
+            successMessage.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Загрузка предпросмотра записей
+        function loadAppointmentsPreview() {
+            const previewContent = document.getElementById('previewContent');
+            
+            try {
+                const appointments = JSON.parse(localStorage.getItem('beautySphereAppointments') || '[]');
+                
+                // Фильтруем только активные записи (будущие)
+                const now = new Date();
+                const activeAppointments = appointments.filter(app => {
+                    if (!app.date || !app.time) return false;
+                    const appointmentDate = new Date(`${app.date}T${app.time}`);
+                    return appointmentDate > now && app.status !== 'cancelled';
+                }).slice(0, 5); // Показываем только 5 последних
+                
+                if (activeAppointments.length === 0) {
+                    previewContent.innerHTML = `
+                        <div style="text-align: center; padding: 40px; color: var(--gray);">
+                            <i class="fas fa-calendar-plus" style="font-size: 48px; margin-bottom: 15px; opacity: 0.5;"></i>
+                            <p>У вас пока нет записей</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                previewContent.innerHTML = activeAppointments.map(app => {
+                    const date = new Date(`${app.date}T${app.time}`);
+                    const formattedDate = date.toLocaleDateString('ru-RU', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric'
+                    });
+                    const formattedTime = date.toLocaleTimeString('ru-RU', {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    
+                    let servicesText = '';
+                    if (app.services && app.services.length > 0) {
+                        if (app.services.length === 1) {
+                            servicesText = app.services[0].name;
+                        } else {
+                            servicesText = `${app.services.length} услуги`;
+                        }
+                    }
+                    
+                    return `
+                        <div class="appointment-item" data-id="${app.id}">
+                            <h4>${servicesText}</h4>
+                            <p><i class="fas fa-calendar"></i> ${formattedDate}</p>
+                            <p><i class="fas fa-clock"></i> ${formattedTime}</p>
+                            <p><i class="fas fa-user-tie"></i> ${app.master?.name || 'Мастер не выбран'}</p>
+                            <p><i class="fas fa-money-bill-wave"></i> ${app.totalPrice || '0'} руб.</p>
+                            <div class="appointment-actions">
+                                <button class="btn btn-outline-primary btn-sm edit-appointment" data-id="${app.id}" style="width: 100%;">
+                                    <i class="fas fa-edit"></i> Изменить
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                // Обновляем количество записей в кнопке
+                const viewBtn = document.getElementById('viewAppointmentsBtn');
+                if (viewBtn && activeAppointments.length > 0) {
+                    const span = viewBtn.querySelector('span');
+                    if (span) {
+                        span.textContent = `Мои записи (${activeAppointments.length})`;
+                    }
+                }
+                
+                // Добавляем обработчики для кнопок редактирования
+                document.querySelectorAll('.edit-appointment').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const appointmentId = parseInt(this.dataset.id);
+                        editAppointment(appointmentId);
+                    });
+                });
+                
+            } catch (error) {
+                console.error('Ошибка загрузки записей:', error);
+                previewContent.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #e74c3c;">
+                        <p>Ошибка загрузки записей</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Редактирование записи
+        function editAppointment(appointmentId) {
+            const appointments = JSON.parse(localStorage.getItem('beautySphereAppointments') || '[]');
+            const appointment = appointments.find(app => app.id === appointmentId);
+            
+            if (!appointment) {
+                alert('Запись не найдена');
+                return;
+            }
+            
+            // Загружаем данные в форму
+            loadAppointmentIntoForm(appointment);
+            
+            // Удаляем оригинальную запись
+            const updatedAppointments = appointments.filter(app => app.id !== appointmentId);
+            localStorage.setItem('beautySphereAppointments', JSON.stringify(updatedAppointments));
+            
+            // Закрываем окно предпросмотра
+            document.getElementById('appointmentsPreview').classList.remove('active');
+            
+            // Показываем сообщение
+            alert('Запись загружена для редактирования. Заполните форму и подтвердите изменения.');
+        }
+        
+        // Загрузка записи в форму
+        function loadAppointmentIntoForm(appointment) {
+            // Сбрасываем текущий выбор
+            document.querySelectorAll('.service-card-horizontal.selected').forEach(card => {
+                card.classList.remove('selected');
+            });
+            document.querySelectorAll('.master-card-horizontal.selected').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Сбрасываем данные
+            bookingData = {
+                services: [],
+                master: null,
+                date: appointment.date || null,
+                time: appointment.time || null,
+                client: {},
+                totalPrice: 0
+            };
+            
+            // Загружаем услуги
+            if (appointment.services && appointment.services.length > 0) {
+                appointment.services.forEach(service => {
+                    bookingData.services.push(service);
+                    // Находим и выделяем карточку услуги
+                    setTimeout(() => {
+                        const serviceCard = document.querySelector(`.service-card-horizontal[data-service-id="${service.id}"]`);
+                        if (serviceCard) {
+                            serviceCard.classList.add('selected');
+                        }
+                    }, 100);
+                });
+                updateSelectedCount();
+            }
+            
+            // Загружаем мастера
+            if (appointment.master) {
+                bookingData.master = appointment.master;
+                setTimeout(() => {
+                    const masterCard = document.querySelector(`.master-card-horizontal[data-master-id="${appointment.master.id}"]`);
+                    if (masterCard) {
+                        masterCard.classList.add('selected');
+                    }
+                }, 100);
+                updateSelectedMasterInfo();
+            }
+            
+            // Загружаем дату и время
+            if (appointment.date) {
+                bookingData.date = appointment.date;
+                updateSelectedDateDisplay(appointment.date);
+                
+                // Обновляем календарь
+                const dateObj = new Date(appointment.date);
+                renderCalendar(dateObj.getMonth(), dateObj.getFullYear());
+                
+                setTimeout(() => {
+                    const dayElement = document.querySelector(`.calendar-day[data-date="${appointment.date}"]`);
+                    if (dayElement) {
+                        dayElement.classList.add('selected');
+                    }
+                }, 200);
+            }
+            
+            if (appointment.time) {
+                bookingData.time = appointment.time;
+                setTimeout(() => {
+                    generateTimeSlots();
+                    setTimeout(() => {
+                        const timeSlot = document.querySelector(`.time-slot[data-time="${appointment.time}"]`);
+                        if (timeSlot) {
+                            timeSlot.classList.add('selected');
+                        }
+                    }, 300);
+                }, 300);
+            }
+            
+            updateSelectedDateTimeInfo();
+            
+            // Загружаем данные клиента
+            if (appointment.client) {
+                if (appointment.client.name) {
+                    document.getElementById('clientName').value = appointment.client.name;
+                }
+                if (appointment.client.phone) {
+                    document.getElementById('clientPhone').value = appointment.client.phone;
+                }
+                if (appointment.client.email) {
+                    document.getElementById('clientEmail').value = appointment.client.email;
+                }
+                if (appointment.client.comment) {
+                    document.getElementById('clientComment').value = appointment.client.comment;
+                }
+            }
+            
+            // Обновляем сводку
+            updateSummary();
+            
+            // Прокручиваем к началу формы
+            document.getElementById('servicesSection').scrollIntoView({ behavior: 'smooth' });
+            
+            // Показываем уведомление
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #2ecc71;
+                color: white;
+                padding: 15px 25px;
+                border-radius: 8px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                z-index: 10000;
+                animation: slideInRight 0.3s ease;
+            `;
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Запись загружена для редактирования</span>
+                </div>
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

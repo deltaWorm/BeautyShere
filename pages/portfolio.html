@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Портфолио - Beauty Сфера</title>
+    <!-- Фавиконки для разных устройств -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/logo/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/logo/favicon-16x16.png">
+    <link rel="manifest" href="../images/logo/site.webmanifest">
+    <link rel="mask-icon" href="../images/logo/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+    <link rel="stylesheet" href="../css/portfolio.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Дополнительные стили для загрузки изображений */
+        .gallery-grid img {
+            transition: opacity 0.5s ease;
+        }
+        
+        .gallery-grid img.loading {
+            opacity: 0;
+        }
+        
+        .gallery-grid img.loaded {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="../index.html" class="logo">
+                    <img src="../images/logo/logo.png" alt="Beauty Сфера" class="logo-img">
+                    <span class="logo-text">
+                        <span class="logo-text">Beauty</span>
+                        <span class="logo-highlight">Сфера</span>
+                    </span>
+                </a>
+                
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="../index.html" class="nav-link">Главная</a></li>
+                        <li><a href="services.html" class="nav-link">Услуги и цены</a></li>
+                        <li><a href="masters.html" class="nav-link">Мастера</a></li>
+                        <li><a href="booking.html" class="nav-link">Онлайн-запись</a></li>
+                        <li><a href="portfolio.html" class="nav-link active">Портфолио</a></li>
+                        <li><a href="news.html" class="nav-link">Акции</a></li>
+                        <li><a href="contacts.html" class="nav-link">Контакты</a></li>
+                        <li><a href="cabinet.html" class="nav-link cabinet-link">
+                            <i class="fas fa-user"></i> Личный кабинет
+                        </a></li>
+                    </ul>
+                </nav>
+                
+                <button class="mobile-menu-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Хлебные крошки -->
+    <div class="breadcrumbs">
+        <div class="container">
+            <a href="../index.html">Главная</a>
+            <span>/</span>
+            <span>Портфолио</span>
+        </div>
+    </div>
+
+    <!-- Заголовок страницы -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Портфолио наших работ</h1>
+            <p>Результаты работы наших мастеров. Каждая работа - это уникальный образ, созданный с учетом пожеланий клиента</p>
+        </div>
+    </section>
+
+    <!-- Фильтры портфолио -->
+    <section class="portfolio-filters">
+        <div class="container">
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">Все работы</button>
+                <button class="filter-tab" data-filter="haircuts">Стрижки</button>
+                <button class="filter-tab" data-filter="coloring">Окрашивание</button>
+                <button class="filter-tab" data-filter="styling">Укладки</button>
+                <button class="filter-tab" data-filter="care">Уход</button>
+                <button class="filter-tab" data-filter="men">Мужские</button>
+                <button class="filter-tab" data-filter="women">Женские</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Галерея портфолио -->
+    <section class="portfolio-gallery">
+        <div class="container">
+            <!-- Статическая галерея - картинки видны сразу -->
+            <div class="gallery-grid">
+                <!-- Работа 1 -->
+                <div class="portfolio-item" data-category="haircuts women">
+                    <div class="portfolio-image">
+                        <img src="../images/portfolio/haircuts/1.jpg" alt="Стильная стрижка каре" 
+                             onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div style=\'background: linear-gradient(135deg, var(--primary), var(--secondary)); height:100%; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold; font-size:16px; padding:20px; text-align:center;\'>Стрижка каре<br>Анна Волкова</div>';">
+                        <div class="portfolio-overlay">
+                            <button class="view-btn" data-id="1">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Стильная стрижка каре</h3>
+                        <div class="portfolio-meta">
+                            <span class="portfolio-master">
+                                <i class="fas fa-user"></i> Анна Волкова
+                            </span>
+                            <span class="portfolio-date">
+                                <i class="fas fa-calendar"></i> 15.01.2025
+                            </span>
+                        </div>
+                        <div class="portfolio-categories">
+                            <span class="portfolio-category">Стрижки</span>
+                            <span class="portfolio-category">Женские</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Работа 2 -->
+                <div class="portfolio-item" data-category="coloring women">
+                    <div class="portfolio-image">
+                        <img src="../images/portfolio/coloring/1.jpg" alt="Сложное окрашивание блонд"
+                             onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div style=\'background: linear-gradient(135deg, #4db6ac, #2c8c99); height:100%; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold; font-size:16px; padding:20px; text-align:center;\'>Окрашивание блонд<br>Марина Смирнова</div>';">
+                        <div class="portfolio-overlay">
+                            <button class="view-btn" data-id="2">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Сложное окрашивание блонд</h3>
+                        <div class="portfolio-meta">
+                            <span class="portfolio-master">
+                                <i class="fas fa-user"></i> Марина Смирнова
+                            </span>
+                            <span class="portfolio-date">
+                                <i class="fas fa-calendar"></i> 20.01.2025
+                            </span>
+                        </div>
+                        <div class="portfolio-categories">
+                            <span class="portfolio-category">Окрашивание</span>
+                            <span class="portfolio-category">Женские</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Работа 3 -->
+                <div class="portfolio-item" data-category="haircuts men">
+                    <div class="portfolio-image">
+                        <img src="../images/portfolio/men/1.jpg" alt="Мужская стрижка с fade"
+                             onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div style=\'background: linear-gradient(135deg, #2c3e50, #34495e); height:100%; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold; font-size:16px; padding:20px; text-align:center;\'>Мужская стрижка<br>Сергей Иванов</div>';">
+                        <div class="portfolio-overlay">
+                            <button class="view-btn" data-id="3">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Мужская стрижка с fade</h3>
+                        <div class="portfolio-meta">
+                            <span class="portfolio-master">
+                                <i class="fas fa-user"></i> Сергей Иванов
+                            </span>
+                            <span class="portfolio-date">
+                                <i class="fas fa-calendar"></i> 18.01.2025
+                            </span>
+                        </div>
+                        <div class="portfolio-categories">
+                            <span class="portfolio-category">Стрижки</span>
+                            <span class="portfolio-category">Мужские</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Работа 4 -->
+                <div class="portfolio-item" data-category="styling women">
+                    <div class="portfolio-image">
+                        <img src="../images/portfolio/styling/1.jpg" alt="Вечерняя укладка"
+                             onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div style=\'background: linear-gradient(135deg, #e84393, #fd79a8); height:100%; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold; font-size:16px; padding:20px; text-align:center;\'>Вечерняя укладка<br>Елена Петрова</div>';">
+                        <div class="portfolio-overlay">
+                            <button class="view-btn" data-id="4">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Вечерняя укладка</h3>
+                        <div class="portfolio-meta">
+                            <span class="portfolio-master">
+                                <i class="fas fa-user"></i> Елена Петрова
+                            </span>
+                            <span class="portfolio-date">
+                                <i class="fas fa-calendar"></i> 22.01.2025
+                            </span>
+                        </div>
+                        <div class="portfolio-categories">
+                            <span class="portfolio-category">Укладки</span>
+                            <span class="portfolio-category">Женские</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Работа 5 -->
+                <div class="portfolio-item" data-category="care women">
+                    <div class="portfolio-image">
+                        <img src="../images/portfolio/care/1.jpg" alt="Кератиновое выпрямление"
+                             onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div style=\'background: linear-gradient(135deg, #00b894, #00cec9); height:100%; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold; font-size:16px; padding:20px; text-align:center;\'>Кератиновое выпрямление<br>Анна Волкова</div>';">
+                        <div class="portfolio-overlay">
+                            <button class="view-btn" data-id="5">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Кератиновое выпрямление</h3>
+                        <div class="portfolio-meta">
+                            <span class="portfolio-master">
+                                <i class="fas fa-user"></i> Анна Волкова
+                            </span>
+                            <span class="portfolio-date">
+                                <i class="fas fa-calendar"></i> 25.01.2025
+                            </span>
+                        </div>
+                        <div class="portfolio-categories">
+                            <span class="portfolio-category">Уход</span>
+                            <span class="portfolio-category">Женские</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Работа 6 -->
+                <div class="portfolio-item" data-category="coloring women">
+                    <div class="portfolio-image">
+                        <img src="../images/portfolio/coloring/2.jpg" alt="Окрашивание в рыжий"
+                             onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div style=\'background: linear-gradient(135deg, #e17055, #fdcb6e); height:100%; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold; font-size:16px; padding:20px; text-align:center;\'>Рыжее окрашивание<br>Марина Смирнова</div>';">
+                        <div class="portfolio-overlay">
+                            <button class="view-btn" data-id="6">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Окрашивание в рыжий</h3>
+                        <div class="portfolio-meta">
+                            <span class="portfolio-master">
+                                <i class="fas fa-user"></i> Марина Смирнова
+                            </span>
+                            <span class="portfolio-date">
+                                <i class="fas fa-calendar"></i> 12.01.2025
+                            </span>
+                        </div>
+                        <div class="portfolio-categories">
+                            <span class="portfolio-category">Окрашивание</span>
+                            <span class="portfolio-category">Женские</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Работа 7 -->
+                <div class="portfolio-item" data-category="haircuts women">
+                    <div class="portfolio-image">
+                        <img src="../images/portfolio/haircuts/2.jpg" alt="Стрижка боб"
+                             onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div style=\'background: linear-gradient(135deg, #6c5ce7, #a29bfe); height:100%; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold; font-size:16px; padding:20px; text-align:center;\'>Стрижка боб<br>Елена Петрова</div>';">
+                        <div class="portfolio-overlay">
+                            <button class="view-btn" data-id="7">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Стрижка боб</h3>
+                        <div class="portfolio-meta">
+                            <span class="portfolio-master">
+                                <i class="fas fa-user"></i> Елена Петрова
+                            </span>
+                            <span class="portfolio-date">
+                                <i class="fas fa-calendar"></i> 28.01.2025
+                            </span>
+                        </div>
+                        <div class="portfolio-categories">
+                            <span class="portfolio-category">Стрижки</span>
+                            <span class="portfolio-category">Женские</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Работа 8 -->
+                <div class="portfolio-item" data-category="haircuts men">
+                    <div class="portfolio-image">
+                        <img src="../images/portfolio/men/2.jpg" alt="Мужская стрижка классика"
+                             onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div style=\'background: linear-gradient(135deg, #2d3436, #636e72); height:100%; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold; font-size:16px; padding:20px; text-align:center;\'>Классическая стрижка<br>Сергей Иванов</div>';">
+                        <div class="portfolio-overlay">
+                            <button class="view-btn" data-id="8">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Мужская стрижка классика</h3>
+                        <div class="portfolio-meta">
+                            <span class="portfolio-master">
+                                <i class="fas fa-user"></i> Сергей Иванов
+                            </span>
+                            <span class="portfolio-date">
+                                <i class="fas fa-calendar"></i> 30.01.2025
+                            </span>
+                        </div>
+                        <div class="portfolio-categories">
+                            <span class="portfolio-category">Стрижки</span>
+                            <span class="portfolio-category">Мужские</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- До/После -->
+    <section class="before-after">
+        <div class="container">
+            <h2 class="section-title">До и после</h2>
+            <div class="ba-container">
+                <div class="ba-item">
+                    <div class="ba-image">
+                        <div class="ba-before">
+                            <img src="../images/before-after/before1.jpg" alt="До" class="ba-img"
+                                 onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div style=\'background: #f8d7da; height:100%; display:flex; align-items:center; justify-content:center; color:#721c24; font-weight:bold; font-size:16px;\'>ДО</div>';">
+                            <div class="ba-label">До</div>
+                        </div>
+                        <div class="ba-after">
+                            <img src="../images/before-after/after1.jpg" alt="После" class="ba-img"
+                                 onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div style=\'background: #d4edda; height:100%; display:flex; align-items:center; justify-content:center; color:#155724; font-weight:bold; font-size:16px;\'>ПОСЛЕ</div>';">
+                            <div class="ba-label">После</div>
+                        </div>
+                    </div>
+                    <div class="ba-info">
+                        <h3>Комплексное окрашивание</h3>
+                        <p>Клиентка: Елена, 32 года<br>Мастер: Анна Волкова<br>Услуга: Сложное окрашивание + кератиновое выпрямление</p>
+                    </div>
+                </div>
+                <div class="ba-item">
+                    <div class="ba-image">
+                        <div class="ba-before">
+                            <img src="../images/before-after/before2.jpg" alt="До" class="ba-img"
+                                 onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div style=\'background: #f8d7da; height:100%; display:flex; align-items:center; justify-content:center; color:#721c24; font-weight:bold; font-size:16px;\'>ДО</div>';">
+                            <div class="ba-label">До</div>
+                        </div>
+                        <div class="ba-after">
+                            <img src="../images/before-after/after2.jpg" alt="После" class="ba-img"
+                                 onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div style=\'background: #d4edda; height:100%; display:flex; align-items:center; justify-content:center; color:#155724; font-weight:bold; font-size:16px;\'>ПОСЛЕ</div>';">
+                            <div class="ba-label">После</div>
+                        </div>
+                    </div>
+                    <div class="ba-info">
+                        <h3>Мужская стрижка и уход</h3>
+                        <p>Клиент: Сергей, 28 лет<br>Мастер: Сергей Иванов<br>Услуга: Мужская стрижка + стрижка бороды + уход</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Отзывы клиентов -->
+    <section class="portfolio-reviews">
+        <div class="container">
+            <h2 class="section-title">Истории наших клиентов</h2>
+            <div class="stories-grid">
+                <div class="story-card">
+                    <div class="story-image">
+                        <img src="../images/stories/story1.jpg" alt="История клиента Мария"
+                             onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div style=\'background: linear-gradient(135deg, #ffeaa7, #fab1a0); height:100%; display:flex; align-items:center; justify-content:center; color:#2d3436; font-weight:bold; font-size:16px; padding:20px; text-align:center;\'>Мария<br>25 лет</div>';">
+                    </div>
+                    <div class="story-content">
+                        <h3>Мария, 25 лет</h3>
+                        <p>"Долго искала мастера по окрашиванию. Анна из Beauty Сфера сделала именно тот цвет, который я хотела. Теперь хожу только к ней!"</p>
+                        <div class="story-service">
+                            <span>Услуга:</span> Сложное окрашивание
+                        </div>
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-image">
+                        <img src="../images/stories/story2.jpg" alt="История клиента Александр"
+                             onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div style=\'background: linear-gradient(135deg, #74b9ff, #0984e3); height:100%; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold; font-size:16px; padding:20px; text-align:center;\'>Александр<br>35 лет</div>';">
+                    </div>
+                    <div class="story-content">
+                        <h3>Александр, 35 лет</h3>
+                        <p>"Сергей - лучший барбер в городе! Делает идеальные стрижки, всегда аккуратно и со вкусом. Рекомендую всем мужчинам."</p>
+                        <div class="story-service">
+                            <span>Услуга:</span> Мужская стрижка + борода
+                        </div>
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-image">
+                        <img src="../images/stories/story3.jpg" alt="История клиента Ольга"
+                             onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div style=\'background: linear-gradient(135deg, #a29bfe, #6c5ce7); height:100%; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold; font-size:16px; padding:20px; text-align:center;\'>Ольга<br>40 лет</div>';">
+                    </div>
+                    <div class="story-content">
+                        <h3>Ольга, 40 лет</h3>
+                        <p>"После беременности волосы были в ужасном состоянии. Елена сделала кератиновое восстановление - волосы как новые!"</p>
+                        <div class="story-service">
+                            <span>Услуга:</span> Кератиновое восстановление
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Призыв к действию -->
+    <section class="portfolio-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Хотите такой же результат?</h2>
+                <p>Запишитесь на консультацию к нашим мастерам. Они помогут подобрать оптимальный вариант именно для вас</p>
+                <a href="booking.html" class="btn btn-primary">Записаться на консультацию</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3 class="footer-title">Beauty Сфера</h3>
+                    <p class="footer-text">Профессиональная парикмахерская в Большом Камне. Создаем красоту и стиль с 2015 года.</p>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Контакты</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Улица Карла Маркса, 13а, 1 этаж</p>
+                    <p><i class="fas fa-phone"></i> +7 (423) 352-14-25</p>
+                    <p><i class="fas fa-envelope"></i> beauty-sphere@mail.ru</p>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Часы работы</h3>
+                    <p>Понедельник - Пятница: 9:00 - 20:00</p>
+                    <p>Суббота: 10:00 - 19:00</p>
+                    <p>Воскресенье: 10:00 - 18:00</p>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Быстрые ссылки</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html">Услуги и цены</a></li>
+                        <li><a href="masters.html">Наши мастера</a></li>
+                        <li><a href="booking.html">Онлайн-запись</a></li>
+                        <li><a href="news.html">Акции и новости</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Beauty Сфера. Все права защищены.</p>
+                <div class="social-links">
+                    <a href="https://vk.com/beautysphere_bk" target="_blank"><i class="fab fa-vk"></i></a>
+                    <a href="https://instagram.com/beauty_sphere_bk" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://t.me/beautysphere_bk" target="_blank"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модалка для изображений -->
+    <div class="modal" id="image-modal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <img id="modal-image" src="" alt="">
+            <div class="modal-info" id="modal-info"></div>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/portfolio.js"></script>
+</body>
+</html>
